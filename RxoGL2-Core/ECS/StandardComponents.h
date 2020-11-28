@@ -1,7 +1,6 @@
 #pragma once
 #include "ECS.h"
 #include "../Event/Event.h"
-#include "../Singletons/TextureCache.h"
 
 namespace ECS
 {
@@ -36,26 +35,7 @@ namespace ECS
 	public:
 		Sprite(const std::string& textureName, const std::string& filePath, float r, float g, float b, float a, bool isTextureSheet = false);
 		Sprite(float r, float g, float b, float a);
-		void Add(std::string framename, float bl_x, float bl_y, float w, float h) // For SpriteSheet
-		{
-			switch (m_IsSpriteSheet) {
-			case true:
-				bl_x /= m_TextureData->Height();
-				bl_y /= m_TextureData->Width();
-				w /= m_TextureData->Height();
-				h /= m_TextureData->Width();
-				m_TexCoordsCache[framename] = TexCoords
-				{
-					glm::vec2(bl_x		, bl_y),	 // bl
-					glm::vec2(bl_x + w	, bl_y),	 // br
-					glm::vec2(bl_x + w	, bl_y + h), // tr
-					glm::vec2(bl_x		, bl_y + h)  // tl 
-				};
-				break;
-			default:
-				break;
-			}
-		}
+		void Add(std::string framename, float bl_x, float bl_y, float w, float h); // For SpriteSheet
 
 		// Getters/Setters
 		inline const sPtrTextureData& Texture() const { return m_TextureData; }
@@ -75,6 +55,15 @@ namespace ECS
 
 	class Label : public RenderableComponent
 	{
-
+	private:
+		std::string m_Text;
+		float m_Scale;
+		std::string m_FontName;
+		RXOcolor m_Color;
+	public:
+		inline const std::string&	Text()		const { return m_Text; }
+		inline const float&			Scale()		const { return m_Scale; }
+		inline const std::string&	FontName()	const { return m_FontName; }
+		inline const RXOcolor&		Color()		const { return m_Color; }
 	};
 }

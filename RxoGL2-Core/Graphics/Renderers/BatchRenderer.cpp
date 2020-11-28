@@ -1,5 +1,7 @@
 #include "BatchRenderer.h"
 #include "../../ECS/StandardComponents.h"
+#include "../../Singletons/FontCache.h"
+#include "../../Singletons/TextureCache.h"
 
 BatchRenderer2D::BatchRenderer2D()
 	: Renderer2D(),
@@ -117,17 +119,25 @@ void BatchRenderer2D::Submit(const ECS::sPtrSprite component)
 
 void BatchRenderer2D::Submit(const ECS::sPtrLabel component)
 {
-	const std::string& text = label->GetText();
-	float x_Offset = transform->GetPosition().x;
-	const Font& font = Application::GetInstance()->GetFontManager().GetFont(label->GetFontName());
+	const auto& entity		= component->Entity();
+	const auto& transform	= entity->GetComponent<ECS::Transform>();
+
+	const auto& position	= transform->Position();
+	const auto& size		= transform->Size();
+
+	const auto& color	= component->Color();
+	const auto& text	= component->Text();
+
+	float x_Offset = transform->Position().x;
+	const auto& font = Singletons::FontCache::Instance()->GetFont(component->FontName());
 
 	for (const char& c : text)
 	{
 		//const constants::rxoPosition&	position	= transform.GetPosition();
-		const RXOcolor& color = label->GetColor();
-		const Character& ch = font.GetCharacter(c);
+		const RXOcolor& color = component->Color();
+		const Character& ch = font->GetChar(c);
 		const unsigned int& texID = ch.TextureID;
-		const float& scale = label->GetScale();
+		const float& scale = component->Scale();
 		const bool& isText = true;
 
 		float xpos = x_Offset + ch.Bearing.x * scale;

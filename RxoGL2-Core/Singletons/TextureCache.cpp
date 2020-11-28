@@ -31,6 +31,8 @@ void TextureData::Load()
 
 namespace Singletons
 {
+	sPtrTextureCache TextureCache::m_Instance = NULL;
+
 	sPtrTextureData TextureCache::AddTexture(std::string path)
 	{
 		m_Textures[path] = std::make_shared<TextureData>(path);

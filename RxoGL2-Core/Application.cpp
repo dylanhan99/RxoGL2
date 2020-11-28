@@ -22,8 +22,6 @@ Application::Application()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
-
 }
 
 Application::~Application()
@@ -81,9 +79,7 @@ void Application::Init()
 void Application::OnUpdate(float deltatime)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-
 }
 
 void Application::OnRender()

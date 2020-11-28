@@ -157,6 +157,7 @@
     <ClCompile Include="Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Event\Event.cpp" />
+    <ClCompile Include="Singletons\FontCache.cpp" />
     <ClCompile Include="Singletons\TextureCache.cpp" />
     <ClCompile Include="Vendor\Imgui\imgui.cpp" />
     <ClCompile Include="Vendor\Imgui\imgui_demo.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Graphics\Renderers\Renderer.h" />
     <ClInclude Include="Graphics\Shaders\Shader.h" />
     <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Singletons\FontCache.h" />
     <ClInclude Include="Singletons\TextureCache.h" />
     <ClInclude Include="Utils\Font.h" />
     <ClInclude Include="Utils\Timer.h" />

@@ -15,6 +15,7 @@
 
 // [Independent][Class Declaration]
 class Application;
+class Font;
 class Layer;
 class Shader;
 class TextureData;
@@ -32,6 +33,7 @@ namespace ECS
 namespace Singletons
 {
 	class TextureCache;
+	class FontCache;
 }
 
 // [Independent][Typedefs][General][GLFW][GLEW][GLM]
@@ -64,6 +66,7 @@ constexpr char EVENT_NAME_OnPosChange[] = "OnPosChange";
 
 // [Shared Pointers]
 typedef std::shared_ptr<Application> sPtrApplication;
+typedef std::shared_ptr<Font> sPtrFont;
 typedef std::shared_ptr<Layer> sPtrLayer;
 typedef std::shared_ptr<Shader> sPtrShader;
 typedef std::shared_ptr<TextureData> sPtrTextureData;
@@ -81,6 +84,7 @@ namespace ECS
 namespace Singletons
 {
 	typedef std::shared_ptr<TextureCache> sPtrTextureCache;
+	typedef std::shared_ptr<FontCache> sPtrFontCache;
 }
 
 // [ECS]

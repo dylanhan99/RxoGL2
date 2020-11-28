@@ -63,7 +63,7 @@ private:
 		FT_Done_FreeType(lib);
 	}
 public:
-	Font(){}
+	//Font(){}
 	Font(std::string path, unsigned int fontSize)
 		: m_FilePath(path), m_FontSize(fontSize)
 	{ Setup(); }
