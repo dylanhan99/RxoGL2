@@ -5,24 +5,30 @@ namespace ECS
 	// Entity
 	void Entity::OnUpdate(float deltatime)
 	{
-
+		for (auto& c : m_Components) c->OnUpdate(deltatime);
 	}
-
 	void Entity::OnDraw()
 	{
-
+		for (auto& c : m_Components) c->OnDraw();
 	}
 
-	// Entity Manager
-	void EntityManager::OnUpdate(float deltatime)
+	// Entity List
+	void EntityList::OnUpdate(float deltatime)
 	{
 		for (auto& e : m_Entities) e->OnUpdate(deltatime);
 	}
-	void EntityManager::OnDraw()
+	void EntityList::OnDraw()
 	{
 		for (auto& e : m_Entities) e->OnDraw();
 	}
-	void EntityManager::Refresh()
+	sPtrEntity EntityList::AddEntity(Entity* e)
+	{
+		sPtrEntity sPtr{ e };
+		m_Entities.push_back(sPtr);
+		m_Entities_Tags[sPtr->Tag()].push_back(sPtr);
+		return sPtr;
+	}
+	void EntityList::Refresh()
 	{
 		m_Entities.erase(std::remove_if(std::begin(m_Entities), std::end(m_Entities), [](const sPtrEntity& entity)
 			{

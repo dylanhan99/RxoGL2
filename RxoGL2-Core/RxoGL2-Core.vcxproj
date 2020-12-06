@@ -155,6 +155,9 @@
     <ClCompile Include="Graphics\Buffers\VertexArray.cpp" />
     <ClCompile Include="Graphics\Renderers\BatchRenderer.cpp" />
     <ClCompile Include="Graphics\Shaders\Shader.cpp" />
+    <ClCompile Include="Layering\Group.cpp" />
+    <ClCompile Include="Layering\Layer.cpp" />
+    <ClCompile Include="Layering\Scene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Singletons\FontCache.cpp" />
@@ -178,6 +181,9 @@
     <ClInclude Include="Graphics\Renderers\Renderer.h" />
     <ClInclude Include="Graphics\Shaders\Shader.h" />
     <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Layering\Group.h" />
+    <ClInclude Include="Layering\Layer.h" />
+    <ClInclude Include="Layering\Scene.h" />
     <ClInclude Include="Singletons\FontCache.h" />
     <ClInclude Include="Singletons\TextureCache.h" />
     <ClInclude Include="Utils\Font.h" />

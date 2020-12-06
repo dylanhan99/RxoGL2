@@ -7,7 +7,7 @@ class Application
 private:
 	static sPtrApplication m_Instance;
 	sPtrWindow m_Window;
-	sPtrShader m_Shader;
+	uPtrSceneMenu m_SceneMenu;
 public:
 	Application();
 	~Application();

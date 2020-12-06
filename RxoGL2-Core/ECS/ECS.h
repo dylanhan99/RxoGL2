@@ -24,7 +24,7 @@ namespace ECS
 		EntityID	m_EntID = NewEntityID();
 		bool		m_Active;
 		std::string m_Tag;
-		sPtrLayer	m_Layer;
+		mutable sPtrLayer	m_Layer;
 		std::vector<sPtrComponent> m_Components;
 		ComponentArray	 m_ComponentArray;
 		ComponentBitSet	 m_ComponentBitSet;
@@ -57,11 +57,12 @@ namespace ECS
 		}
 
 		// Getters/Setters
-		inline const EntityID& ID()	const { return m_EntID; }
-		inline const bool Active() const { return m_Active; }
-		inline void Active(bool state) { m_Active = state; }
-		inline const std::string Tag()	const { return m_Tag; }
-		inline void Tag(std::string tag) { m_Tag = tag; }
+		inline const	EntityID& ID()			const	{ return m_EntID; }
+		inline const	bool Active()			const	{ return m_Active; }
+		inline			void Active(bool state)			{ m_Active = state; }
+		inline const	std::string Tag()		const	{ return m_Tag; }
+		inline			void Tag(std::string tag)		{ m_Tag = tag; }
+		inline			sPtrLayer Layer()		const	{ return m_Layer; }
 
 		template <typename T>
 		std::shared_ptr<T> GetComponent() const
@@ -91,7 +92,7 @@ namespace ECS
 		inline const sPtrEntity Entity() const { return m_Entity; }
 	};
 
-	class EntityManager
+	class EntityList
 	{
 	private:
 		std::vector<sPtrEntity> m_Entities;

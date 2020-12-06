@@ -15,8 +15,12 @@
 
 // [Independent][Class Declaration]
 class Application;
+class BatchRenderer2D;
 class Font;
+class Group;
 class Layer;
+class Scene;
+class SceneMenu;
 class Shader;
 class TextureData;
 class VertexBuffer;
@@ -26,6 +30,7 @@ namespace ECS
 {
 	class Component;
 	class Entity;
+	class EntityList;
 	class Sprite;
 	class Label;
 }
@@ -64,10 +69,16 @@ struct Character {
 // [Event Names]
 constexpr char EVENT_NAME_OnPosChange[] = "OnPosChange";
 
+// [Unique Pointers]
+typedef std::unique_ptr<SceneMenu> uPtrSceneMenu;
+
 // [Shared Pointers]
 typedef std::shared_ptr<Application> sPtrApplication;
+typedef std::shared_ptr<BatchRenderer2D> sPtrBatchRenderer2D;
 typedef std::shared_ptr<Font> sPtrFont;
+typedef std::shared_ptr<Group> sPtrGroup;
 typedef std::shared_ptr<Layer> sPtrLayer;
+typedef std::shared_ptr<Scene> sPtrScene;
 typedef std::shared_ptr<Shader> sPtrShader;
 typedef std::shared_ptr<TextureData> sPtrTextureData;
 typedef std::shared_ptr<VertexBuffer> sPtrVBO;
@@ -77,6 +88,7 @@ namespace ECS
 {
 	typedef std::shared_ptr<Component>	sPtrComponent;
 	typedef std::shared_ptr<Entity>		sPtrEntity;
+	typedef std::shared_ptr<EntityList>	sPtrEntityList;
 	typedef std::shared_ptr<Sprite>		sPtrSprite;
 	typedef std::shared_ptr<Label>		sPtrLabel;
 }

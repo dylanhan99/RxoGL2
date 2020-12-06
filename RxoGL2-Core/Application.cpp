@@ -1,27 +1,29 @@
 #include "Application.h"
 #include "Vendor/imgui-single.h"
+#include "Layering/Scene.h"
 
 sPtrApplication Application::m_Instance = NULL;
 
 Application::Application()
 {
 	Init();
-	m_Shader = std::make_shared<Shader>("../res/Shaders/basicVert.shader", "../res/Shaders/basicFrag.shader");
-	float vertices[] = {
-	-0.5f, -0.5f, 0.0f,
-	-0.5f,  0.5f, 0.0f,
-	 0.5f,  0.5f, 0.0f//,
-	 //0.5f, -0.5f, 0.0f
-	};
-
-	m_Shader->Bind();
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	
+	//m_Shader = std::make_shared<Shader>("../res/Shaders/basicVert.shader", "../res/Shaders/basicFrag.shader");
+	//float vertices[] = {
+	//-0.5f, -0.5f, 0.0f,
+	//-0.5f,  0.5f, 0.0f,
+	// 0.5f,  0.5f, 0.0f//,
+	// //0.5f, -0.5f, 0.0f
+	//};
+	//
+	//m_Shader->Bind();
+	//unsigned int vbo;
+	//glGenBuffers(1, &vbo);
+	//glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	//
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
 }
 
 Application::~Application()
@@ -51,6 +53,7 @@ void Application::ApplicationLoop()
 void Application::Init()
 {
 	m_Window = std::make_shared<Window>("RxoGL-2", 960, 540);
+	m_SceneMenu = std::make_unique<SceneMenu>(new Scene()); // Have a default Scene be added somewhere...
 	glClearColor(0.2f, 0.3f, 0.8f, 1.f);
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	glEnable(GL_BLEND);
@@ -79,12 +82,15 @@ void Application::Init()
 void Application::OnUpdate(float deltatime)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
+	
+	if(m_SceneMenu->CurrentScene())
+		m_SceneMenu->CurrentScene()->OnUpdate(deltatime);
 }
 
 void Application::OnRender()
 {
-
+	m_SceneMenu->CurrentScene()->OnRender();
 }
 
 void Application::OnImguiRender()
@@ -95,6 +101,9 @@ void Application::OnImguiRender()
 	ImGui::NewFrame();
 
 	ImGui::Begin("Scenes");
+
+	m_SceneMenu->CurrentScene()->OnRender();
+
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
 	// Rendering
