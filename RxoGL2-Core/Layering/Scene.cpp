@@ -25,6 +25,11 @@ sPtrLayer Scene::AddLayer(Layer* l)
 }
 
 // Scene Menu
+SceneMenu::SceneMenu()
+{
+	RegisterScene<Scene>("Sample Scene");
+	LoadScene("Sample Scene");
+}
 SceneMenu::SceneMenu(Scene* currentScenePointer)
 	: m_CurrentScene(currentScenePointer)
 {
@@ -41,6 +46,7 @@ void SceneMenu::OnImguiRender()
 	{
 		if (ImGui::Button(test.first.c_str()))
 		{
+			std::cout << "Loading '" << test.first << "'...\n";
 			m_CurrentScene = test.second;
 		}
 	}

@@ -1,6 +1,5 @@
 #pragma once
-#include "Window.h"
-#include "Graphics/Shaders/Shader.h"
+#include "Constants.h"
 
 class Application
 {

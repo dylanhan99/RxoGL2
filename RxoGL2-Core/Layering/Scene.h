@@ -23,6 +23,7 @@ private:
 	std::unordered_map<std::string, sPtrScene> m_Scenes;
 	sPtrScene m_CurrentScene;
 public:
+	SceneMenu();
 	SceneMenu(Scene* currentScenePointer);
 	~SceneMenu();
 
