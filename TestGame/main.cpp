@@ -1,7 +1,13 @@
 #include "Application.h"
+#include "Layering/Scene.h"
+
+#include "Scenes/MainScene.h"
 
 int main()
 {
-	Application::Instance()->ApplicationLoop();
+	auto App = Application::Instance();
+	App->GetSceneMenu()->RegisterScene<MainScene>("MainScene");
+	App->GetSceneMenu()->LoadScene("MainScene");
+	App->ApplicationLoop();
 	return 0;
 }

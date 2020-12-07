@@ -6,7 +6,7 @@ class Application
 private:
 	static sPtrApplication m_Instance;
 	sPtrWindow m_Window;
-	uPtrSceneMenu m_SceneMenu;
+	sPtrSceneMenu m_SceneMenu;
 public:
 	Application();
 	~Application();
@@ -17,6 +17,9 @@ public:
 		return m_Instance;
 	}
 	void ApplicationLoop();
+
+	// Getters/Setters
+	inline const sPtrSceneMenu GetSceneMenu() const { return m_SceneMenu; }
 private:
 	void Init();
 	void OnUpdate(float deltatime);

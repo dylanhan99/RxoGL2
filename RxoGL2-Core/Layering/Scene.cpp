@@ -17,9 +17,9 @@ void Scene::OnImguiRender()
 {
 
 }
-sPtrLayer Scene::AddLayer(Layer* l)
+sPtrLayer Scene::AddLayer(Layer& l)
 {
-	sPtrLayer sPtr{ l };
+	sPtrLayer sPtr{ &l };
 	m_Layers.push_back(sPtr);
 	return sPtr;
 }

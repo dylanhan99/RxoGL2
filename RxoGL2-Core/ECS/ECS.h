@@ -18,12 +18,15 @@ namespace ECS
 	class Entity
 	{
 	private:
+		friend class EntityList;
+
 		inline EntityID NewEntityID()
 		{ static EntityID lastID = 0; return lastID++; }
 
 		EntityID	m_EntID = NewEntityID();
 		bool		m_Active;
 		std::string m_Tag;
+		sPtrEntity m_sPtrThis;
 		mutable sPtrLayer	m_Layer;
 		std::vector<sPtrComponent> m_Components;
 		ComponentArray	 m_ComponentArray;
@@ -43,8 +46,8 @@ namespace ECS
 		{
 			T* c(new T(std::forward<TArgs>(mArgs)...));
 			std::shared_ptr<T> sPtr{ c };
-			sPtr->m_Entity = this;
-			sPtr->m_SptThis = sPtr;
+			sPtr->m_Entity = m_sPtrThis;
+			sPtr->m_sPtrThis = sPtr;
 
 			m_ComponentArray[GetComponentTypeID<T>()] = sPtr;
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
@@ -81,7 +84,7 @@ namespace ECS
 		friend class Entity;
 	protected:
 		sPtrEntity m_Entity; // Reference to the entity it is attached to
-		std::shared_ptr<void> m_SptThis;
+		std::shared_ptr<void> m_sPtrThis;
 	public:
 		virtual ~Component() {}
 		virtual void OnInit() {}
@@ -98,9 +101,10 @@ namespace ECS
 		std::vector<sPtrEntity> m_Entities;
 		std::unordered_map<std::string, std::vector<sPtrEntity>> m_Entities_Tags;
 	public:
+		~EntityList() {}
 		void OnUpdate(float deltatime);
 		void OnDraw();
-		sPtrEntity AddEntity(Entity* e);
+		sPtrEntity AddEntity(Entity& e);
 		void Refresh();
 
 		// Getters/Setters

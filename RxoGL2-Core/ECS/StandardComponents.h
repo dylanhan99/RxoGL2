@@ -11,6 +11,7 @@ namespace ECS
 		RXOsize m_Size;
 		Event::EventDispatcher m_OnPosChange;
 	public:
+		Transform(float x, float y, float z) : m_Position(RXOposition(x, y, z, 1)) {}
 		// Getters/Setters
 		inline const RXOposition& Position() const					  { return m_Position; }
 		inline		 void		  Position(float x, float y, float z) { m_Position.x = x; m_Position.y = y; m_Position.z = z; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }

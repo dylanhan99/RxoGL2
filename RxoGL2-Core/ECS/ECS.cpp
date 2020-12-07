@@ -21,9 +21,10 @@ namespace ECS
 	{
 		for (auto& e : m_Entities) e->OnDraw();
 	}
-	sPtrEntity EntityList::AddEntity(Entity* e)
+	sPtrEntity EntityList::AddEntity(Entity& e)
 	{
-		sPtrEntity sPtr{ e };
+		sPtrEntity sPtr{ &e };
+		sPtr->m_sPtrThis = sPtr;
 		m_Entities.push_back(sPtr);
 		m_Entities_Tags[sPtr->Tag()].push_back(sPtr);
 		return sPtr;

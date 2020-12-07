@@ -4,14 +4,15 @@
 namespace ECS
 {
 	Group::Group(const glm::mat4& transform)
-		: m_TransformationMatrix(transform)
+		: m_TransformationMatrix(transform),
+		m_EntityList(std::make_shared<ECS::EntityList>())
 	{
 
 	}
 
-	void Group::Add(Entity* entity)
+	ECS::sPtrEntity Group::Add(Entity& entity)
 	{
-		m_EntityList->AddEntity(entity);
+		return m_EntityList->AddEntity(entity);
 	}
 
 	void Group::OnUpdate(float deltatime)

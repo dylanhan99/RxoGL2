@@ -55,7 +55,7 @@ void Application::ApplicationLoop()
 void Application::Init()
 {
 	m_Window = std::make_shared<Window>("RxoGL-2", 960, 540);
-	m_SceneMenu = std::make_unique<SceneMenu>(); // Have a default Scene be added somewhere...
+	m_SceneMenu = std::make_shared<SceneMenu>();
 	glClearColor(0.2f, 0.3f, 0.8f, 1.f);
 	std::cout << glGetString(GL_VERSION) << std::endl;
 	glEnable(GL_BLEND);

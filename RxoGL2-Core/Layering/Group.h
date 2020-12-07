@@ -10,7 +10,7 @@ namespace ECS
 		glm::mat4 m_TransformationMatrix;
 	public:
 		Group(const glm::mat4& transform);
-		void Add(Entity* entity);
+		ECS::sPtrEntity Add(Entity& entity);
 
 		void OnUpdate(float deltatime) override;
 		void OnDraw() override;

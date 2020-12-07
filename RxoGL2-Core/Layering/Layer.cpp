@@ -2,8 +2,11 @@
 #include "../Graphics/Renderers/BatchRenderer.h"
 #include "../Graphics/Shaders/Shader.h"
 
-Layer::Layer(sPtrBatchRenderer2D renderer, sPtrShader shader, glm::mat4 matrix)
-	: m_Renderer(renderer), m_Shader(shader), m_ProjectionMatrix(matrix), m_sPtrThis(this)
+Layer::Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix)
+	: m_Renderer(std::make_shared<BatchRenderer2D>(/*renderer*/)), 
+	m_Shader(std::make_shared<Shader>(shader)), 
+	m_ProjectionMatrix(matrix), 
+	m_EntityList(std::make_shared<ECS::EntityList>()), m_sPtrThis(this)
 {
 	
 }
@@ -12,6 +15,7 @@ Layer::~Layer()
 {
 	//for (unsigned int i = 0; i < m_Renderables.size(); i++)
 	//	delete m_Renderables[i];
+	return;
 }
 
 void Layer::OnUpdate(float deltatime)
@@ -28,7 +32,9 @@ void Layer::OnRender()
 	m_Renderer->Flush();
 }
 
-void Layer::Add(ECS::Entity* entity)
+ECS::sPtrEntity Layer::Add(ECS::Entity& entity)
 {
-	m_EntityList->AddEntity(entity)->Layer() = m_sPtrThis;
+	auto sPtr = m_EntityList->AddEntity(entity);
+	sPtr->Layer() = m_sPtrThis;
+	return sPtr;
 }

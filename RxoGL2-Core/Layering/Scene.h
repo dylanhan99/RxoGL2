@@ -14,7 +14,7 @@ public:
 	virtual void OnRender();
 	virtual void OnImguiRender();
 
-	sPtrLayer AddLayer(Layer* newLayer);
+	sPtrLayer AddLayer(Layer& newLayer);
 };
 
 class SceneMenu : public Scene
@@ -46,6 +46,7 @@ public:
 		{
 			if (!m_Scenes.at(sceneName))
 				throw sceneName;
+			std::cout << "Loading '" << sceneName << "'..." << std::endl;
 			m_CurrentScene = m_Scenes.at(sceneName);
 		}
 		catch (std::string ex)

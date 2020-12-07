@@ -70,7 +70,6 @@ struct Character {
 constexpr char EVENT_NAME_OnPosChange[] = "OnPosChange";
 
 // [Unique Pointers]
-typedef std::unique_ptr<SceneMenu> uPtrSceneMenu;
 
 // [Shared Pointers]
 typedef std::shared_ptr<Application> sPtrApplication;
@@ -79,6 +78,7 @@ typedef std::shared_ptr<Font> sPtrFont;
 typedef std::shared_ptr<Group> sPtrGroup;
 typedef std::shared_ptr<Layer> sPtrLayer;
 typedef std::shared_ptr<Scene> sPtrScene;
+typedef std::shared_ptr<SceneMenu> sPtrSceneMenu;
 typedef std::shared_ptr<Shader> sPtrShader;
 typedef std::shared_ptr<TextureData> sPtrTextureData;
 typedef std::shared_ptr<VertexBuffer> sPtrVBO;
