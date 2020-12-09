@@ -17,6 +17,7 @@ public:
 	virtual void OnRender();
 	virtual ECS::sPtrEntity Add(ECS::Entity& entity);
 
+	// Getters/Setters
 	inline const sPtrBatchRenderer2D	GetRenderer()	const { return m_Renderer; }
 	inline const sPtrShader				GetShader()	const { return m_Shader; }
 	inline std::vector<ECS::sPtrEntity> GetEntitiesTag(std::string tag) { return m_EntityList->GetEntitiesTag(tag); }

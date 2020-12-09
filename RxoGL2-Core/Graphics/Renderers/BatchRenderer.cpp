@@ -52,16 +52,16 @@ void BatchRenderer2D::Submit(const ECS::sPtrSprite component)
 	const auto& transform	= entity->GetComponent<ECS::Transform>();
 	const auto& sprite		= entity->GetComponent<ECS::Sprite>();
 
-	const auto& position	= transform->Position();
-	const auto& size		= transform->Size();
+	const auto& position	= transform->GetPosition();
+	const auto& size		= transform->GetSize();
 
-	const auto& color = sprite->Color();
-	const auto& texCoords = sprite->Coords();
-	const auto& texID = sprite->Texture()->ID();
+	const auto& color = sprite->GetColor();
+	const auto& texCoords = sprite->GetCoords();
+	const auto& texID = sprite->GetTexture()->ID();
 	const bool& isText = false;
 	float texSlot = 0.f;
 	bool found = false;
-	if (sprite->Texture())
+	if (sprite->GetTexture())
 	{
 		for (int i = 0; i < m_TextureSlots.size(); i++)
 		{
@@ -122,22 +122,22 @@ void BatchRenderer2D::Submit(const ECS::sPtrLabel component)
 	const auto& entity		= component->Entity();
 	const auto& transform	= entity->GetComponent<ECS::Transform>();
 
-	const auto& position	= transform->Position();
-	const auto& size		= transform->Size();
+	const auto& position	= transform->GetPosition();
+	const auto& size		= transform->GetSize();
 
-	const auto& color	= component->Color();
-	const auto& text	= component->Text();
+	const auto& color	= component->GetColor();
+	const auto& text	= component->GetText();
 
-	float x_Offset = transform->Position().x;
-	const auto& font = Singletons::FontCache::Instance()->GetFont(component->FontName());
+	float x_Offset = transform->GetPosition().x;
+	const auto& font = Singletons::FontCache::Instance()->GetFont(component->GetFontName());
 
 	for (const char& c : text)
 	{
 		//const constants::rxoPosition&	position	= transform.GetPosition();
-		const RXOcolor& color = component->Color();
+		const RXOcolor& color = component->GetColor();
 		const Character& ch = font->GetChar(c);
 		const unsigned int& texID = ch.TextureID;
-		const float& scale = component->Scale();
+		const float& scale = component->GetScale();
 		const bool& isText = true;
 
 		float xpos = x_Offset + ch.Bearing.x * scale;

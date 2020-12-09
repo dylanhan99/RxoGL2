@@ -20,15 +20,15 @@ MainScene::~MainScene()
 
 void MainScene::OnUpdate(float deltatime)
 {
-
+	Scene::OnUpdate(deltatime);
 }
 
 void MainScene::OnRender()
 {
-
+	Scene::OnRender();
 }
 
 void MainScene::OnImguiRender()
 {
-
+	
 }

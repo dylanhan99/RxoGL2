@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)bin\$(Configuration)\intermediates</IntDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\intermediates\</IntDir>
     <IncludePath>$(SolutionDir)Dependencies\GLEW\include\;$(SolutionDir)Dependencies\GLFW\include\;$(SolutionDir)Dependencies\FreeImage\include\;$(SolutionDir)Dependencies\FreeType\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Dependencies\GLEW\lib\;$(SolutionDir)Dependencies\GLFW\lib\;$(SolutionDir)Dependencies\FreeImage\lib\;$(SolutionDir)Dependencies\FreeType\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>

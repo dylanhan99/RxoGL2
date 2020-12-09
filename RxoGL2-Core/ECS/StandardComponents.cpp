@@ -1,8 +1,12 @@
 #include "StandardComponents.h"
 #include "../Singletons/TextureCache.h"
+#include "../Graphics/Renderers/BatchRenderer.h"
+#include "../Layering/Layer.h"
+#include "../Utils/Timer.h"
 
 namespace ECS
 {
+	//Sprite
 	Sprite::Sprite(const std::string& textureName, const std::string& filePath, float r, float g, float b, float a, bool isSpriteSheet)
 		: m_TextureData(Singletons::TextureCache::Instance()->AddTexture(filePath)),
 		m_TexCoords({ glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 1.0f) }),
@@ -11,14 +15,20 @@ namespace ECS
 	{
 
 	}
-
 	Sprite::Sprite(float r, float g, float b, float a)
 		: m_TexCoords({ glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 1.0f) }),
 		m_Color({r, g, b, a})
 	{
 
 	}
-
+	void Sprite::OnDraw()
+	{
+		//{
+		//	Timer();
+		//	auto d = dynamic_cast<Sprite*>(m_sPtrThis.get());
+		//}
+		//m_Entity->Layer()->GetRenderer()->Submit((sPtrSprite)m_sPtrThis);
+	}
 	void Sprite::Add(std::string framename, float bl_x, float bl_y, float w, float h) // For SpriteSheet
 	{
 		switch (m_IsSpriteSheet) {
@@ -40,4 +50,9 @@ namespace ECS
 		}
 	}
 
+	// Label
+	void Label::OnDraw()
+	{
+
+	}
 }
