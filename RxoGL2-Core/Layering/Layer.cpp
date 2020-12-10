@@ -35,6 +35,6 @@ void Layer::OnRender()
 ECS::sPtrEntity Layer::Add(ECS::Entity& entity)
 {
 	auto sPtr = m_EntityList->AddEntity(entity);
-	sPtr->Layer() = m_sPtrThis;
+	sPtr->SetLayer(m_sPtrThis);
 	return sPtr;
 }

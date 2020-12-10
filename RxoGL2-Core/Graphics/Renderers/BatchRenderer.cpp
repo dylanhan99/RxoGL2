@@ -46,7 +46,7 @@ void BatchRenderer2D::Begin()
 	m_Buffer = (Vertex*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 }
 
-void BatchRenderer2D::Submit(const ECS::sPtrSprite component)
+void BatchRenderer2D::Submit(const ECS::PtrSprite component)
 {
 	const auto& entity		= component->Entity();
 	const auto& transform	= entity->GetComponent<ECS::Transform>();
@@ -117,7 +117,7 @@ void BatchRenderer2D::Submit(const ECS::sPtrSprite component)
 	return;
 }
 
-void BatchRenderer2D::Submit(const ECS::sPtrLabel component)
+void BatchRenderer2D::Submit(const ECS::PtrLabel component)
 {
 	const auto& entity		= component->Entity();
 	const auto& transform	= entity->GetComponent<ECS::Transform>();
