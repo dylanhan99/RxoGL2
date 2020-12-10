@@ -47,7 +47,7 @@ namespace ECS
 			T* c(new T(std::forward<TArgs>(mArgs)...));
 			std::shared_ptr<T> sPtr{ c };
 			sPtr->m_Entity = m_sPtrThis;
-			sPtr->m_sPtrThis = sPtr;
+			//sPtr->m_sPtrThis = sPtr;
 
 			m_ComponentArray[GetComponentTypeID<T>()] = sPtr;
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
@@ -66,6 +66,7 @@ namespace ECS
 		inline const	std::string Tag()		const	{ return m_Tag; }
 		inline			void Tag(std::string tag)		{ m_Tag = tag; }
 		inline			sPtrLayer Layer()		const	{ return m_Layer; }
+		inline			void SetLayer(sPtrLayer layer)			{ m_Layer = layer; }
 
 		template <typename T>
 		std::shared_ptr<T> GetComponent() const
@@ -84,7 +85,7 @@ namespace ECS
 		friend class Entity;
 	protected:
 		sPtrEntity m_Entity; // Reference to the entity it is attached to
-		std::shared_ptr<void> m_sPtrThis;
+		//std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
 		virtual void OnInit() {}

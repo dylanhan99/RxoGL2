@@ -13,11 +13,11 @@ namespace ECS
 	public:
 		Transform(float x, float y, float z) : m_Position(RXOposition(x, y, z, 1)) {}
 		// Getters/Setters
-		inline const RXOposition& GetPosition() const					  { return m_Position; }
-		inline		 void		  SetPosition(float x, float y, float z) { m_Position.x = x; m_Position.y = y; m_Position.z = z; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
-		inline		 void		  SetPosition(RXOposition& pos)		  { m_Position = pos; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
-		inline const RXOsize& GetSize() const		  { return m_Size; }
-		inline		 void	  SetSize(RXOsize& size) { m_Size = size; }
+		inline const RXOposition&	GetPosition() const						{ return m_Position; }
+		inline		 void			SetPosition(float x, float y, float z)	{ m_Position.x = x; m_Position.y = y; m_Position.z = z; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
+		inline		 void			SetPosition(RXOposition& pos)			{ m_Position = pos; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
+		inline const RXOsize&		GetSize() const							{ return m_Size; }
+		inline		 void			SetSize(RXOsize& size)					{ m_Size = size; }
 		inline const Event::EventDispatcher& OnPosChange() const { return m_OnPosChange; }
 	};
 

@@ -69,6 +69,13 @@ struct Character {
 // [Event Names]
 constexpr char EVENT_NAME_OnPosChange[] = "OnPosChange";
 
+// [Pointers]
+namespace ECS
+{
+	typedef Sprite* PtrSprite;
+	typedef Label*  PtrLabel;
+}
+
 // [Unique Pointers]
 
 // [Shared Pointers]
@@ -97,6 +104,13 @@ namespace Singletons
 {
 	typedef std::shared_ptr<TextureCache> sPtrTextureCache;
 	typedef std::shared_ptr<FontCache> sPtrFontCache;
+}
+
+// [Weak Pointers]
+namespace ECS
+{
+	typedef std::weak_ptr<Sprite>		wPtrSprite;
+	typedef std::weak_ptr<Label>		wPtrLabel;
 }
 
 // [ECS]

@@ -25,9 +25,9 @@ namespace ECS
 	{
 		//{
 		//	Timer();
-		//	auto d = dynamic_cast<Sprite*>(m_sPtrThis.get());
+		//	auto d = std::dynamic_pointer_cast<ECS::Sprite>(m_sPtrThis);
 		//}
-		//m_Entity->Layer()->GetRenderer()->Submit((sPtrSprite)m_sPtrThis);
+		m_Entity->Layer()->GetRenderer()->Submit(this); 
 	}
 	void Sprite::Add(std::string framename, float bl_x, float bl_y, float w, float h) // For SpriteSheet
 	{
@@ -53,6 +53,6 @@ namespace ECS
 	// Label
 	void Label::OnDraw()
 	{
-
+		m_Entity->Layer()->GetRenderer()->Submit(this);
 	}
 }

@@ -38,8 +38,8 @@ public:
 	}
 
 	virtual void Begin() {}
-	virtual void Submit(const ECS::sPtrSprite component) = 0;
-	virtual void Submit(const ECS::sPtrLabel component) = 0;
+	virtual void Submit(const ECS::PtrSprite component) = 0;
+	virtual void Submit(const ECS::PtrLabel component) = 0;
 	virtual void End() {}
 	virtual void Flush() = 0;
 };

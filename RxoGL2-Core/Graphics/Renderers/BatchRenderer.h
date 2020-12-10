@@ -27,8 +27,8 @@ public:
 	~BatchRenderer2D();
 
 	void Begin() override;
-	void Submit(const ECS::sPtrSprite component) override;
-	void Submit(const ECS::sPtrLabel component) override;
+	void Submit(const ECS::PtrSprite component) override;
+	void Submit(const ECS::PtrLabel component) override;
 	void End() override;
 	void Flush() override;
 };
