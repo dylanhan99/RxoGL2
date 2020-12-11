@@ -153,6 +153,7 @@
     <ClCompile Include="ECS\StandardComponents.cpp" />
     <ClCompile Include="Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Graphics\Cameras\CameraOrtho.cpp" />
     <ClCompile Include="Graphics\Renderers\BatchRenderer.cpp" />
     <ClCompile Include="Graphics\Shaders\Shader.cpp" />
     <ClCompile Include="Layering\Group.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="ECS\StandardComponents.h" />
     <ClInclude Include="Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Graphics\Cameras\CameraOrtho.h" />
     <ClInclude Include="Graphics\Renderers\BatchRenderer.h" />
     <ClInclude Include="Graphics\Renderers\Renderer.h" />
     <ClInclude Include="Graphics\Shaders\Shader.h" />
