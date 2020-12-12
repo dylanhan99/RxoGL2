@@ -31,14 +31,16 @@ namespace ECS
 	class Component;
 	class Entity;
 	class EntityList;
+	class NativeScript;
 	class Sprite;
 	class Label;
 }
 
 namespace Singletons
 {
-	class TextureCache;
+	class EventDispatcher;
 	class FontCache;
+	class TextureCache;
 }
 
 // [Independent][Typedefs][General][GLFW][GLEW][GLM]
@@ -67,7 +69,9 @@ struct Character {
 };
 
 // [Event Names]
-constexpr char EVENT_NAME_OnPosChange[] = "OnPosChange";
+constexpr char EVENT_NAME_WINDOWRESIZE[]	= "WindowResize";
+constexpr char EVENT_NAME_SCROLLWHEEL[]		= "ScrollWheel";
+constexpr char EVENT_NAME_OnPosChange[]		= "OnPosChange";
 
 // [Pointers]
 namespace ECS
@@ -102,8 +106,9 @@ namespace ECS
 
 namespace Singletons
 {
-	typedef std::shared_ptr<TextureCache> sPtrTextureCache;
+	typedef std::shared_ptr<EventDispatcher> sPtrEventDispatcher;
 	typedef std::shared_ptr<FontCache> sPtrFontCache;
+	typedef std::shared_ptr<TextureCache> sPtrTextureCache;
 }
 
 // [Weak Pointers]

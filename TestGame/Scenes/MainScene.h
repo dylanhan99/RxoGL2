@@ -11,6 +11,7 @@ private:
 	Shader s1;
 
 	Layer l1;
+	ECS::Entity camera;
 	ECS::Entity e1;
 
 public:

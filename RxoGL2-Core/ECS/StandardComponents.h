@@ -1,6 +1,7 @@
 #pragma once
 #include "ECS.h"
 #include "../Event/Event.h"
+#include "../Singletons/EventCache.h"
 
 namespace ECS
 {
@@ -9,7 +10,7 @@ namespace ECS
 	private:
 		RXOposition m_Position;
 		RXOsize m_Size;
-		Event::EventDispatcher m_OnPosChange;
+		Singletons::EventDispatcher m_OnPosChange;
 	public:
 		Transform(float x, float y, float z) : m_Position(RXOposition(x, y, z, 1)) {}
 		// Getters/Setters
@@ -18,7 +19,7 @@ namespace ECS
 		inline		 void			SetPosition(RXOposition& pos)			{ m_Position = pos; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
 		inline const RXOsize&		GetSize() const							{ return m_Size; }
 		inline		 void			SetSize(RXOsize& size)					{ m_Size = size; }
-		inline const Event::EventDispatcher& OnPosChange() const { return m_OnPosChange; }
+		inline const Singletons::EventDispatcher& OnPosChange() const		{ return m_OnPosChange; }
 	};
 
 	class Sprite : public RenderableComponent

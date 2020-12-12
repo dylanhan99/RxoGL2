@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+
 #include "../Constants.h"
 
 namespace ECS
@@ -115,5 +117,73 @@ namespace ECS
 	class RenderableComponent : public Component
 	{
 
+	};
+
+	// T meaning Script Type
+	//template <typename T, typename... TArgs>
+	class NativeScriptComponent : public Component
+	{
+	private:
+		//T* m_Instance = nullptr;
+		NativeScript* m_ScriptInstance = nullptr;
+	public:
+		std::function<void()> InstantiateFunction;
+		std::function<void()> DestroyInstanceFunction;
+		std::function<void()> OnCreateFunction;
+		std::function<void()> OnDestroyFunction;
+		std::function<void(float)> OnUpdateFunction;
+
+		//NativeScriptComponent(TArgs&&... mArgs)
+		//{
+		//	InstantiateFunction = [&]() {
+		//		if (!m_Instance)
+		//		{
+		//			m_Instance = new T(std::forward<TArgs>(mArgs)...);
+		//			((T*)m_Instance)->m_Entity = m_Entity;
+		//		}
+		//	};
+		//	DestroyInstanceFunction = [&]() { delete (T*)m_Instance; m_Instance = nullptr; };
+		//
+		//	OnCreateFunction = [&]() { ((T*)m_Instance)->OnCreate(); };
+		//	OnDestroyFunction = [&]() { ((T*)m_Instance)->OnDestroy(); };
+		//	OnUpdateFunction = [&](float deltatime) { ((T*)m_Instance)->OnUpdate(deltatime); };
+		//
+		//	//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+		//}
+
+		template <typename T, typename... TArgs>
+		T* Bind(TArgs&&... mArgs)
+		{
+			InstantiateFunction = [&]() {
+				if (!m_ScriptInstance)
+				{
+					m_ScriptInstance = new T(std::forward<TArgs>(mArgs)...);
+					((T*)m_ScriptInstance)->m_Entity = m_Entity;
+				}
+			};
+			DestroyInstanceFunction = [&]() { delete (T*)m_ScriptInstance; m_ScriptInstance = nullptr; };
+		
+			OnCreateFunction = [&]() { ((T*)m_ScriptInstance)->OnCreate(); };
+			OnDestroyFunction = [&]() { ((T*)m_ScriptInstance)->OnDestroy(); };
+			OnUpdateFunction = [&](float deltatime) { ((T*)m_ScriptInstance)->OnUpdate(deltatime); };
+		
+			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+			return (T*)m_ScriptInstance;
+		}
+
+		// Getters/Setters
+		inline NativeScript* GetInstance() { return m_ScriptInstance; }
+	};
+
+	class NativeScript
+	{
+	private:
+		friend class NativeScriptComponent;
+	protected:
+		sPtrEntity m_Entity;
+	public:
+		virtual void OnCreate() = 0;
+		virtual void OnUpdate(float deltatime) = 0;
+		virtual void OnDestroy() = 0;
 	};
 }

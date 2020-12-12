@@ -11,6 +11,7 @@ private:
 	float m_Rotation; // Degrees
 
 public:
+	CameraOrtho();
 	CameraOrtho(float& left, float& right, float& bottom, float& top);
 	~CameraOrtho();
 
@@ -18,9 +19,10 @@ public:
 
 	// Getters/Setters
 	inline const glm::mat4& GetProjMat()		const { return m_ProjMat; }
+				 void		SetProjMat(float left, float right, float bottom, float top);
 	inline const glm::mat4& GetViewMat()		const { return m_ViewMat; }
 	inline const glm::mat4& GetProjViewMat()	const { return m_ProjViewMat; }
 	inline const glm::vec3& GetPos()			const { return m_Pos; }
-	inline		 void		Set(float& x, float& y, float& z)	{ m_Pos = { x, y, z }; }
-	inline		 void		Set(glm::vec3& newPos)				{ m_Pos = newPos; }
+	inline		 void		SetPos(float& x, float& y, float& z)	{ m_Pos = { x, y, z }; }
+	inline		 void		SetPos(glm::vec3& newPos)				{ m_Pos = newPos; }
 };
