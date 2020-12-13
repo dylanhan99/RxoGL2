@@ -49,7 +49,7 @@ namespace ECS
 			T* c(new T(std::forward<TArgs>(mArgs)...));
 			std::shared_ptr<T> sPtr{ c };
 			sPtr->m_Entity = m_sPtrThis;
-			//sPtr->m_sPtrThis = sPtr;
+			sPtr->m_sPtrThis = sPtr;
 
 			m_ComponentArray[GetComponentTypeID<T>()] = sPtr;
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
@@ -87,9 +87,11 @@ namespace ECS
 		friend class Entity;
 	protected:
 		sPtrEntity m_Entity; // Reference to the entity it is attached to
-		//std::shared_ptr<Component> m_sPtrThis;
+		std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
+		virtual void OnPlay() {}
+		virtual void OnStop() {}
 		virtual void OnInit() {}
 		virtual void OnUpdate(float deltatime) {}
 		virtual void OnDraw() {}
@@ -163,11 +165,12 @@ namespace ECS
 			};
 			DestroyInstanceFunction = [&]() { delete (T*)m_ScriptInstance; m_ScriptInstance = nullptr; };
 		
-			OnCreateFunction = [&]() { ((T*)m_ScriptInstance)->OnCreate(); };
-			OnDestroyFunction = [&]() { ((T*)m_ScriptInstance)->OnDestroy(); };
-			OnUpdateFunction = [&](float deltatime) { ((T*)m_ScriptInstance)->OnUpdate(deltatime); };
+			OnCreateFunction	= [&]() { ((T*)m_ScriptInstance)->OnCreate(); };
+			OnDestroyFunction	= [&]() { ((T*)m_ScriptInstance)->OnDestroy(); };
+			OnUpdateFunction	= [&](float deltatime) { ((T*)m_ScriptInstance)->OnUpdate(deltatime); };
 		
 			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
 			return (T*)m_ScriptInstance;
 		}
 

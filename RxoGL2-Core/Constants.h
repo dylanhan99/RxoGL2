@@ -32,6 +32,7 @@ namespace ECS
 	class Entity;
 	class EntityList;
 	class NativeScript;
+	class NativeScriptComponent;
 	class Sprite;
 	class Label;
 }
@@ -100,6 +101,7 @@ namespace ECS
 	typedef std::shared_ptr<Component>	sPtrComponent;
 	typedef std::shared_ptr<Entity>		sPtrEntity;
 	typedef std::shared_ptr<EntityList>	sPtrEntityList;
+	typedef std::shared_ptr<NativeScriptComponent>	sPtrNativeScriptComponent;
 	typedef std::shared_ptr<Sprite>		sPtrSprite;
 	typedef std::shared_ptr<Label>		sPtrLabel;
 }

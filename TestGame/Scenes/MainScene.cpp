@@ -23,6 +23,17 @@ MainScene::~MainScene()
 
 }
 
+void MainScene::OnPlay()
+{
+	for (auto l : m_Layers)
+		l->OnPlay();
+}
+
+void MainScene::OnStop()
+{
+
+}
+
 void MainScene::OnUpdate(float deltatime)
 {
 	Scene::OnUpdate(deltatime);

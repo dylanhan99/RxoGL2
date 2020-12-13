@@ -13,13 +13,11 @@ CameraOrthoController::CameraOrthoController(float aspectRatio, bool isRotating)
 {
 	Singletons::EventDispatcher::Instance()->RegisterEvent(new Event::Event<float, float>(EVENT_NAME_WINDOWRESIZE, &OnResize));
 	Singletons::EventDispatcher::Instance()->RegisterEvent(new Event::Event<int, int>(EVENT_NAME_SCROLLWHEEL, &OnMouseScrolled));
-
-	OnCreate();
 }
 
 CameraOrthoController::~CameraOrthoController()
 {
-	OnDestroy();
+
 }
 
 void CameraOrthoController::OnCreate()
