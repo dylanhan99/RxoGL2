@@ -23,28 +23,27 @@ MainScene::~MainScene()
 
 }
 
-void MainScene::OnPlay()
-{
-	for (auto l : m_Layers)
-		l->OnPlay();
-}
-
-void MainScene::OnStop()
-{
-
-}
-
-void MainScene::OnUpdate(float deltatime)
-{
-	Scene::OnUpdate(deltatime);
-}
-
-void MainScene::OnRender()
-{
-	Scene::OnRender();
-}
-
-void MainScene::OnImguiRender()
-{
-	
-}
+//void MainScene::OnStart()
+//{
+//
+//}
+//
+//void MainScene::OnStop()
+//{
+//
+//}
+//
+//void MainScene::OnUpdate(float deltatime)
+//{
+//
+//}
+//
+//void MainScene::OnRender()
+//{
+//
+//}
+//
+//void MainScene::OnImguiRender()
+//{
+//	
+//}

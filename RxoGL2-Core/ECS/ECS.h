@@ -36,6 +36,9 @@ namespace ECS
 
 	public:
 		Entity(std::string tag = "") : m_Tag(tag) {}
+		virtual void OnAwake();
+		virtual void OnStart();
+		virtual void OnStop();
 		virtual void OnUpdate(float deltatime);
 		virtual void OnDraw();
 
@@ -55,7 +58,7 @@ namespace ECS
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
 			//m_Collidables.emplace_back(sPtr);
 
-			sPtr->OnInit();
+			sPtr->OnAwake();
 			//m_Components.emplace_back(std::move(sPtr)); pls use this in future
 			m_Components.push_back(sPtr);
 			return sPtr;
@@ -90,9 +93,9 @@ namespace ECS
 		std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
-		virtual void OnPlay() {}
+		virtual void OnAwake() {}
+		virtual void OnStart() {}
 		virtual void OnStop() {}
-		virtual void OnInit() {}
 		virtual void OnUpdate(float deltatime) {}
 		virtual void OnDraw() {}
 
@@ -107,6 +110,9 @@ namespace ECS
 		std::unordered_map<std::string, std::vector<sPtrEntity>> m_Entities_Tags;
 	public:
 		~EntityList() {}
+		void OnAwake();
+		void OnStart();
+		void OnStop();
 		void OnUpdate(float deltatime);
 		void OnDraw();
 		sPtrEntity AddEntity(Entity& e);
@@ -125,15 +131,19 @@ namespace ECS
 	//template <typename T, typename... TArgs>
 	class NativeScriptComponent : public Component
 	{
-	private:
-		//T* m_Instance = nullptr;
-		NativeScript* m_ScriptInstance = nullptr;
 	public:
+		NativeScript* Instance = nullptr;
+
+		// InstantiateFunction & DestroyInstanceFunction are belonging to NativeScriptComponent.
 		std::function<void()> InstantiateFunction;
 		std::function<void()> DestroyInstanceFunction;
-		std::function<void()> OnCreateFunction;
-		std::function<void()> OnDestroyFunction;
-		std::function<void(float)> OnUpdateFunction;
+
+		// The rest are lambdas for the script
+		//std::function<void()> OnPlayFunction;
+		//std::function<void()> OnStopFunction;
+		//std::function<void()> OnCreateFunction;
+		//std::function<void()> OnDestroyFunction;
+		//std::function<void(float)> OnUpdateFunction;
 
 		//NativeScriptComponent(TArgs&&... mArgs)
 		//{
@@ -157,25 +167,27 @@ namespace ECS
 		T* Bind(TArgs&&... mArgs)
 		{
 			InstantiateFunction = [&]() {
-				if (!m_ScriptInstance)
+				if (!Instance)
 				{
-					m_ScriptInstance = new T(std::forward<TArgs>(mArgs)...);
-					((T*)m_ScriptInstance)->m_Entity = m_Entity;
+					Instance = new T(std::forward<TArgs>(mArgs)...);
+					((T*)Instance)->m_Entity = m_Entity;
 				}
 			};
-			DestroyInstanceFunction = [&]() { delete (T*)m_ScriptInstance; m_ScriptInstance = nullptr; };
-		
-			OnCreateFunction	= [&]() { ((T*)m_ScriptInstance)->OnCreate(); };
-			OnDestroyFunction	= [&]() { ((T*)m_ScriptInstance)->OnDestroy(); };
-			OnUpdateFunction	= [&](float deltatime) { ((T*)m_ScriptInstance)->OnUpdate(deltatime); };
+			DestroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
+			
+			//OnPlayFunction		= [&]() { ((T*)Instance)->OnPlay(); };
+			//OnStopFunction		= [&]() { ((T*)Instance)->OnStop(); };
+			//OnCreateFunction	= [&]() { ((T*)Instance)->OnCreate(); };
+			//OnDestroyFunction	= [&]() { ((T*)Instance)->OnDestroy(); };
+			//OnUpdateFunction	= [&](float deltatime) { ((T*)Instance)->OnUpdate(deltatime); };
 		
 			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
 			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
-			return (T*)m_ScriptInstance;
+			return (T*)Instance;
 		}
 
 		// Getters/Setters
-		inline NativeScript* GetInstance() { return m_ScriptInstance; }
+		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
 	};
 
 	class NativeScript
@@ -185,8 +197,10 @@ namespace ECS
 	protected:
 		sPtrEntity m_Entity;
 	public:
-		virtual void OnCreate() = 0;
-		virtual void OnUpdate(float deltatime) = 0;
-		virtual void OnDestroy() = 0;
+		virtual void OnAwake() {}
+		virtual void OnStart() {}
+		virtual void OnStop() {}
+		virtual void OnUpdate(float deltatime) {}
+		virtual void OnDestroy() {}
 	};
 }

@@ -18,9 +18,10 @@ public:
 	MainScene();
 	~MainScene();
 
-	void OnPlay() override;
-	void OnStop() override;
-	void OnUpdate(float deltatime) override;
-	void OnRender() override;
-	void OnImguiRender() override;
+	//void OnAwake() override;
+	//void OnStart() override;
+	//void OnStop() override;
+	//void OnUpdate(float deltatime) override;
+	//void OnRender() override;
+	//void OnImguiRender() override;
 };

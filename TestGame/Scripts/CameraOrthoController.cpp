@@ -20,9 +20,19 @@ CameraOrthoController::~CameraOrthoController()
 
 }
 
-void CameraOrthoController::OnCreate()
+void CameraOrthoController::OnAwake()
 {
-	std::cout << "CameraOrthoController Created...\n";
+	std::cout << "CameraOrthoController OnAwake...\n";
+}
+
+void CameraOrthoController::OnStart()
+{
+	std::cout << "CameraOrthoController OnStart...\n";
+}
+
+void CameraOrthoController::OnStop()
+{
+	std::cout << "CameraOrthoController OnStop...\n";
 }
 
 void CameraOrthoController::OnUpdate(float deltatime)

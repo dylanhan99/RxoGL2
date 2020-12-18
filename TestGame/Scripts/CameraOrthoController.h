@@ -18,7 +18,9 @@ public:
 	CameraOrthoController(float aspectRatio, bool rotation = false);
 	~CameraOrthoController();
 
-	void OnCreate() override;
+	virtual void OnAwake() override;
+	virtual void OnStart() override;
+	virtual void OnStop() override;
 	void OnUpdate(float deltatime) override;
 	void OnDestroy() override;
 	// Events

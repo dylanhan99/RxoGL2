@@ -1,11 +1,6 @@
 #include "CameraOrtho.h"
 #include <ext.hpp>
 
-CameraOrtho::CameraOrtho()
-{
-
-}
-
 CameraOrtho::CameraOrtho(float& left, float& right, float& bottom, float& top)
 	: m_ProjMat(glm::ortho(left, right, bottom, top, -1.f, 1.f)),
 	m_ViewMat(1.f)
@@ -29,6 +24,6 @@ void CameraOrtho::CalcViewMat()
 
 void CameraOrtho::SetProjMat(float left, float right, float bottom, float top)
 {
-	m_ProjMat = glm::ortho(left, right, bottom, top, -1.f, 1.f); 
+	m_ProjMat = glm::ortho(left, right, bottom, top, -1.f, 1.f);
 	m_ProjViewMat = m_ProjMat * m_ViewMat;
 }

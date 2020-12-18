@@ -10,8 +10,9 @@ public:
 	Scene() {}
 	virtual ~Scene() {}
 
-	virtual void OnPlay(){}// = 0;
-	virtual void OnStop(){}// = 0;
+	virtual void OnAwake();
+	virtual void OnStart();
+	virtual void OnStop();
 	virtual void OnUpdate(float deltatime);
 	virtual void OnRender();
 	virtual void OnImguiRender();
@@ -52,7 +53,8 @@ public:
 				m_CurrentScene->OnStop();
 			std::cout << "Loading '" << sceneName << "'..." << std::endl;
 			m_CurrentScene = m_Scenes.at(sceneName);
-			m_CurrentScene->OnPlay();
+			m_CurrentScene->OnAwake();
+			m_CurrentScene->OnStart();
 		}
 		catch (std::string ex)
 		{

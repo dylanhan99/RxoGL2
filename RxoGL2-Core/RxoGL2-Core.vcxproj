@@ -181,8 +181,8 @@
     <ClInclude Include="Graphics\Cameras\CameraOrtho.h" />
     <ClInclude Include="Graphics\Renderers\BatchRenderer.h" />
     <ClInclude Include="Graphics\Renderers\Renderer.h" />
-    <ClInclude Include="Graphics\Shaders\Shader.h" />
     <ClInclude Include="Event\Event.h" />
+    <ClInclude Include="Graphics\Shaders\Shader.h" />
     <ClInclude Include="Layering\Group.h" />
     <ClInclude Include="Layering\Layer.h" />
     <ClInclude Include="Layering\Scene.h" />

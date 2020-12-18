@@ -3,23 +3,47 @@
 namespace ECS
 {
 	// Entity
+	void Entity::OnAwake()
+	{
+		for (auto c : m_Components) c->OnAwake();
+	}
+	void Entity::OnStart()
+	{
+		for (auto c : m_Components) c->OnStart();
+	}
+	void Entity::OnStop()
+	{
+		for (auto c : m_Components) c->OnStop();
+	}
 	void Entity::OnUpdate(float deltatime)
 	{
-		for (auto& c : m_Components) c->OnUpdate(deltatime);
+		for (auto c : m_Components) c->OnUpdate(deltatime);
 	}
 	void Entity::OnDraw()
 	{
-		for (auto& c : m_Components) c->OnDraw();
+		for (auto c : m_Components) c->OnDraw();
 	}
 
 	// Entity List
+	void EntityList::OnAwake()
+	{
+		for (auto e : m_Entities) e->OnAwake();
+	}
+	void EntityList::OnStart()
+	{
+		for (auto e : m_Entities) e->OnStart();
+	}
+	void EntityList::OnStop()
+	{
+		for (auto e : m_Entities) e->OnStop();
+	}
 	void EntityList::OnUpdate(float deltatime)
 	{
-		for (auto& e : m_Entities) e->OnUpdate(deltatime);
+		for (auto e : m_Entities) e->OnUpdate(deltatime);
 	}
 	void EntityList::OnDraw()
 	{
-		for (auto& e : m_Entities) e->OnDraw();
+		for (auto e : m_Entities) e->OnDraw();
 	}
 	sPtrEntity EntityList::AddEntity(Entity& e)
 	{

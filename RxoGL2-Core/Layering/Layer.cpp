@@ -18,9 +18,32 @@ Layer::~Layer()
 	return;
 }
 
+void Layer::OnAwake()
+{ 
+	m_EntityList->OnAwake();
+	for (auto nsc : m_Scripts) 
+	{ 
+		nsc->InstantiateFunction();
+		nsc->Instance->OnAwake();
+	} 
+}
+
+void Layer::OnStart()
+{ 
+	m_EntityList->OnStart();
+	for (auto nsc : m_Scripts) nsc->Instance->OnStart();
+}
+
+void Layer::OnStop() 
+{
+	m_EntityList->OnStop();
+	for (auto nsc : m_Scripts) nsc->Instance->OnStop();
+}
+
 void Layer::OnUpdate(float deltatime)
 {
 	m_EntityList->OnUpdate(deltatime);
+	for (auto nsc : m_Scripts) nsc->Instance->OnUpdate(deltatime);
 }
 
 void Layer::OnRender()

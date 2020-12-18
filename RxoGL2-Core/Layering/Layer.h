@@ -14,8 +14,9 @@ protected:
 public:
 	Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix);
 	virtual ~Layer();
-	virtual void OnPlay() { for (auto s : m_Scripts) { s->InstantiateFunction(); s->OnCreateFunction(); } }// = 0;
-	virtual void OnStop(){}// = 0;
+	virtual void OnAwake();
+	virtual void OnStart();
+	virtual void OnStop();
 	virtual void OnUpdate(float deltatime);
 	virtual void OnRender();
 	virtual ECS::sPtrEntity Add(ECS::Entity& entity);
