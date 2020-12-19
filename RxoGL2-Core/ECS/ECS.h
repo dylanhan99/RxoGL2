@@ -190,7 +190,8 @@ namespace ECS
 		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
 	};
 
-	class NativeScript
+	// This is basically MonoBehaviour (how i understand it at least...)
+	class NativeScript 
 	{
 	private:
 		friend class NativeScriptComponent;

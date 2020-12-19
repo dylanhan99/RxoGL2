@@ -84,7 +84,7 @@ void Application::Init()
 void Application::OnUpdate(float deltatime)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
 	
 	if(m_SceneMenu->CurrentScene())
 		m_SceneMenu->CurrentScene()->OnUpdate(deltatime);

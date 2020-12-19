@@ -55,9 +55,6 @@ void SceneMenu::OnImguiRender()
 	for (auto& test : m_Scenes)
 	{
 		if (ImGui::Button(test.first.c_str()))
-		{
-			std::cout << "Loading '" << test.first << "'...\n";
-			m_CurrentScene = test.second;
-		}
+			LoadScene(test.first, test.second);
 	}
 }

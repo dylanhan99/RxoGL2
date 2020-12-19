@@ -39,8 +39,3 @@ void CameraOrthoController::OnUpdate(float deltatime)
 {
 
 }
-
-void CameraOrthoController::OnDestroy()
-{
-	std::cout << "CameraOrthoController Destroyed...\n";
-}

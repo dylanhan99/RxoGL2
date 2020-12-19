@@ -22,7 +22,7 @@ public:
 	virtual void OnStart() override;
 	virtual void OnStop() override;
 	void OnUpdate(float deltatime) override;
-	void OnDestroy() override;
+
 	// Events
 	static void OnResize(float width, float height)
 	{
@@ -35,5 +35,4 @@ public:
 		//m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 		m_Camera.SetProjMat(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 	}
-
 };
