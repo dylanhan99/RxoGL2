@@ -10,6 +10,9 @@ public:
 	Scene() {}
 	virtual ~Scene() {}
 
+	virtual void OnAwake();
+	virtual void OnStart();
+	virtual void OnStop();
 	virtual void OnUpdate(float deltatime);
 	virtual void OnRender();
 	virtual void OnImguiRender();
@@ -40,14 +43,21 @@ public:
 
 	// Getters/Setters
 	inline const sPtrScene CurrentScene() const { return m_CurrentScene; }
-	inline void LoadScene(std::string sceneName)
+	inline void LoadScene(std::string sceneName, sPtrScene scene = nullptr)
 	{
 		try
 		{
 			if (!m_Scenes.at(sceneName))
 				throw sceneName;
+			if(m_CurrentScene)
+				m_CurrentScene->OnStop();
 			std::cout << "Loading '" << sceneName << "'..." << std::endl;
-			m_CurrentScene = m_Scenes.at(sceneName);
+			if (!scene)
+				m_CurrentScene = m_Scenes.at(sceneName);
+			else
+				m_CurrentScene = scene;
+			m_CurrentScene->OnAwake();
+			m_CurrentScene->OnStart();
 		}
 		catch (std::string ex)
 		{

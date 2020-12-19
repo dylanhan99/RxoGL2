@@ -12,6 +12,9 @@ namespace ECS
 		Group(const glm::mat4& transform);
 		ECS::sPtrEntity Add(Entity& entity);
 
+		void OnAwake() override;
+		void OnStart() override;
+		void OnStop() override;
 		void OnUpdate(float deltatime) override;
 		void OnDraw() override;
 	};

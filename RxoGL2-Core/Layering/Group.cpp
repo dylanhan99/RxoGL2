@@ -15,6 +15,21 @@ namespace ECS
 		return m_EntityList->AddEntity(entity);
 	}
 
+	void Group::OnAwake()
+	{
+		m_EntityList->OnAwake();
+	}
+
+	void Group::OnStart()
+	{
+		m_EntityList->OnStart();
+	}
+
+	void Group::OnStop()
+	{
+		m_EntityList->OnStop();
+	}
+
 	void Group::OnUpdate(float deltatime)
 	{
 		m_EntityList->OnUpdate(deltatime);
@@ -22,6 +37,6 @@ namespace ECS
 
 	void Group::OnDraw()
 	{
-
+		m_EntityList->OnDraw();
 	}
 }

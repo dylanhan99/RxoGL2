@@ -1,6 +1,7 @@
 #pragma once
 #include "ECS.h"
 #include "../Event/Event.h"
+#include "../Singletons/EventCache.h"
 
 namespace ECS
 {
@@ -9,16 +10,18 @@ namespace ECS
 	private:
 		RXOposition m_Position;
 		RXOsize m_Size;
-		Event::EventDispatcher m_OnPosChange;
+		Singletons::EventDispatcher m_OnPosChange;
 	public:
 		Transform(float x, float y, float z) : m_Position(RXOposition(x, y, z, 1)) {}
 		// Getters/Setters
-		inline const RXOposition&	GetPosition() const						{ return m_Position; }
+		//inline const RXOposition&	GetPosition() const						{ return m_Position; }
+		inline  RXOposition&	GetPosition() 						{ return m_Position; }
 		inline		 void			SetPosition(float x, float y, float z)	{ m_Position.x = x; m_Position.y = y; m_Position.z = z; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
 		inline		 void			SetPosition(RXOposition& pos)			{ m_Position = pos; m_OnPosChange.DispatchEvent(EVENT_NAME_OnPosChange); }
 		inline const RXOsize&		GetSize() const							{ return m_Size; }
 		inline		 void			SetSize(RXOsize& size)					{ m_Size = size; }
-		inline const Event::EventDispatcher& OnPosChange() const { return m_OnPosChange; }
+		inline		 void			SetSize(float width, float height)	{ m_Size.x = width; m_Size.y = height; }
+		inline const Singletons::EventDispatcher& OnPosChange() const		{ return m_OnPosChange; }
 	};
 
 	class Sprite : public RenderableComponent

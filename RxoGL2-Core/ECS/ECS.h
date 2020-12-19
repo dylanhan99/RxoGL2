@@ -1,4 +1,6 @@
 #pragma once
+#include <functional>
+
 #include "../Constants.h"
 
 namespace ECS
@@ -34,6 +36,9 @@ namespace ECS
 
 	public:
 		Entity(std::string tag = "") : m_Tag(tag) {}
+		virtual void OnAwake();
+		virtual void OnStart();
+		virtual void OnStop();
 		virtual void OnUpdate(float deltatime);
 		virtual void OnDraw();
 
@@ -47,13 +52,13 @@ namespace ECS
 			T* c(new T(std::forward<TArgs>(mArgs)...));
 			std::shared_ptr<T> sPtr{ c };
 			sPtr->m_Entity = m_sPtrThis;
-			//sPtr->m_sPtrThis = sPtr;
+			sPtr->m_sPtrThis = sPtr;
 
 			m_ComponentArray[GetComponentTypeID<T>()] = sPtr;
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
 			//m_Collidables.emplace_back(sPtr);
 
-			sPtr->OnInit();
+			sPtr->OnAwake();
 			//m_Components.emplace_back(std::move(sPtr)); pls use this in future
 			m_Components.push_back(sPtr);
 			return sPtr;
@@ -85,10 +90,12 @@ namespace ECS
 		friend class Entity;
 	protected:
 		sPtrEntity m_Entity; // Reference to the entity it is attached to
-		//std::shared_ptr<Component> m_sPtrThis;
+		std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
-		virtual void OnInit() {}
+		virtual void OnAwake() {}
+		virtual void OnStart() {}
+		virtual void OnStop() {}
 		virtual void OnUpdate(float deltatime) {}
 		virtual void OnDraw() {}
 
@@ -103,6 +110,9 @@ namespace ECS
 		std::unordered_map<std::string, std::vector<sPtrEntity>> m_Entities_Tags;
 	public:
 		~EntityList() {}
+		void OnAwake();
+		void OnStart();
+		void OnStop();
 		void OnUpdate(float deltatime);
 		void OnDraw();
 		sPtrEntity AddEntity(Entity& e);
@@ -115,5 +125,83 @@ namespace ECS
 	class RenderableComponent : public Component
 	{
 
+	};
+
+	// T meaning Script Type
+	//template <typename T, typename... TArgs>
+	class NativeScriptComponent : public Component
+	{
+	public:
+		NativeScript* Instance = nullptr;
+
+		// InstantiateFunction & DestroyInstanceFunction are belonging to NativeScriptComponent.
+		std::function<void()> InstantiateFunction;
+		std::function<void()> DestroyInstanceFunction;
+
+		// The rest are lambdas for the script
+		//std::function<void()> OnPlayFunction;
+		//std::function<void()> OnStopFunction;
+		//std::function<void()> OnCreateFunction;
+		//std::function<void()> OnDestroyFunction;
+		//std::function<void(float)> OnUpdateFunction;
+
+		//NativeScriptComponent(TArgs&&... mArgs)
+		//{
+		//	InstantiateFunction = [&]() {
+		//		if (!m_Instance)
+		//		{
+		//			m_Instance = new T(std::forward<TArgs>(mArgs)...);
+		//			((T*)m_Instance)->m_Entity = m_Entity;
+		//		}
+		//	};
+		//	DestroyInstanceFunction = [&]() { delete (T*)m_Instance; m_Instance = nullptr; };
+		//
+		//	OnCreateFunction = [&]() { ((T*)m_Instance)->OnCreate(); };
+		//	OnDestroyFunction = [&]() { ((T*)m_Instance)->OnDestroy(); };
+		//	OnUpdateFunction = [&](float deltatime) { ((T*)m_Instance)->OnUpdate(deltatime); };
+		//
+		//	//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+		//}
+
+		template <typename T, typename... TArgs>
+		T* Bind(TArgs&&... mArgs)
+		{
+			InstantiateFunction = [&]() {
+				if (!Instance)
+				{
+					Instance = new T(std::forward<TArgs>(mArgs)...);
+					((T*)Instance)->m_Entity = m_Entity;
+				}
+			};
+			DestroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
+			
+			//OnPlayFunction		= [&]() { ((T*)Instance)->OnPlay(); };
+			//OnStopFunction		= [&]() { ((T*)Instance)->OnStop(); };
+			//OnCreateFunction	= [&]() { ((T*)Instance)->OnCreate(); };
+			//OnDestroyFunction	= [&]() { ((T*)Instance)->OnDestroy(); };
+			//OnUpdateFunction	= [&](float deltatime) { ((T*)Instance)->OnUpdate(deltatime); };
+		
+			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
+			return (T*)Instance;
+		}
+
+		// Getters/Setters
+		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
+	};
+
+	// This is basically MonoBehaviour (how i understand it at least...)
+	class NativeScript 
+	{
+	private:
+		friend class NativeScriptComponent;
+	protected:
+		sPtrEntity m_Entity;
+	public:
+		virtual void OnAwake() {}
+		virtual void OnStart() {}
+		virtual void OnStop() {}
+		virtual void OnUpdate(float deltatime) {}
+		virtual void OnDestroy() {}
 	};
 }
