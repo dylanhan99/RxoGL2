@@ -68,6 +68,7 @@ namespace ECS
 		std::string m_FontName;
 		RXOcolor m_Color;
 	public:
+		Label(std::string text, std::string fontName);
 		void OnDraw() override;
 
 		// Getters/Setters

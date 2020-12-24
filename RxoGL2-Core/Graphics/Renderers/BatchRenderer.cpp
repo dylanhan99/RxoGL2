@@ -10,11 +10,11 @@ BatchRenderer2D::BatchRenderer2D()
 	m_VBO(std::make_shared<VertexBuffer>(RENDERER_BUFFER_SIZE))
 {
 	BufferLayout layout;
-	layout.Push<RXOposition>(1);		// vec4 Pos, 4th element = 1
+	layout.Push<RXOposition>(1);	// vec4 Pos, 4th element = 1
 	layout.Push<RXOcolor>(1);		// vec4 Color
 	layout.Push<RXOtexCoords>(1);	// Texture
-	layout.Push<float>(1);						// Texture ID
-	layout.Push<float>(1);						// IsText
+	layout.Push<float>(1);			// Texture ID
+	layout.Push<float>(1);			// IsText
 
 	m_VAO->AddBuffer(m_VBO, layout);
 

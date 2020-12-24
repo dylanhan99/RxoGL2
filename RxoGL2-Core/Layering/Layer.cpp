@@ -60,3 +60,8 @@ ECS::sPtrEntity Layer::Add(ECS::Entity& entity)
 	sPtr->SetLayer(m_sPtrThis);
 	return sPtr;
 }
+
+void Layer::AddScript(ECS::sPtrNativeScriptComponent component)
+{
+	m_Scripts.push_back(component);
+}

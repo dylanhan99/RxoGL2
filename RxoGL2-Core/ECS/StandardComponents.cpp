@@ -51,6 +51,11 @@ namespace ECS
 	}
 
 	// Label
+	Label::Label(std::string text, std::string fontName)
+		: m_Text(text), m_FontName(fontName), m_Scale(48), m_Color(0.f, 0.f, 0.f, 1.f)
+	{
+
+	}
 	void Label::OnDraw()
 	{
 		m_Entity->Layer()->GetRenderer()->Submit(this);

@@ -169,6 +169,8 @@ namespace ECS
 			InstantiateFunction = [&]() {
 				if (!Instance)
 				{
+					//Instance = std::make_shared<T>(new T(std::forward<TArgs>(mArgs)...));
+					//Instance->m_Entity = m_Entity;
 					Instance = new T(std::forward<TArgs>(mArgs)...);
 					((T*)Instance)->m_Entity = m_Entity;
 				}
@@ -183,7 +185,7 @@ namespace ECS
 		
 			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
 			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
-			return (T*)Instance;
+			return static_cast<T*>(Instance);
 		}
 
 		// Getters/Setters

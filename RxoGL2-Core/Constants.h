@@ -98,12 +98,13 @@ typedef std::shared_ptr<Window> sPtrWindow;
 
 namespace ECS
 {
-	typedef std::shared_ptr<Component>	sPtrComponent;
-	typedef std::shared_ptr<Entity>		sPtrEntity;
-	typedef std::shared_ptr<EntityList>	sPtrEntityList;
+	typedef std::shared_ptr<Component>				sPtrComponent;
+	typedef std::shared_ptr<Entity>					sPtrEntity;
+	typedef std::shared_ptr<EntityList>				sPtrEntityList;
+	typedef std::shared_ptr<NativeScript>			sPtrNativeScript;
 	typedef std::shared_ptr<NativeScriptComponent>	sPtrNativeScriptComponent;
-	typedef std::shared_ptr<Sprite>		sPtrSprite;
-	typedef std::shared_ptr<Label>		sPtrLabel;
+	typedef std::shared_ptr<Sprite>					sPtrSprite;
+	typedef std::shared_ptr<Label>					sPtrLabel;
 }
 
 namespace Singletons

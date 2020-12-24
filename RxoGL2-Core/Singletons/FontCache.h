@@ -16,9 +16,9 @@ namespace Singletons
 				m_Instance = std::make_shared<FontCache>();
 			return m_Instance;
 		}
-		sPtrFont AddFont(std::string path);
+		sPtrFont AddFont(std::string name, std::string path);
 
 		// Getters/Setters
-		inline sPtrFont GetFont(std::string path) const { return m_Fonts.at(path); }
+		inline sPtrFont GetFont(std::string name) const { return m_Fonts.at(name); }
 	};
 }
