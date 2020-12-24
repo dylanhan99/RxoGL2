@@ -7,15 +7,16 @@
 #include "Graphics/Shaders/Shader.h"
 
 // Static variables used for OnEvent functions
-float		CameraOrthoController::m_AspectRatio = NULL;
-float		CameraOrthoController::m_ZoomLevel = 0.f;
 CameraOrtho	CameraOrthoController::m_Camera = CameraOrtho();
+float		CameraOrthoController::m_AspectRatio = NULL;
+float		CameraOrthoController::m_ZoomLevel = 100.f;
 
-CameraOrthoController::CameraOrthoController(float aspectRatio, bool isRotating)
+CameraOrthoController::CameraOrthoController(const float& aspectRatio, bool isRotating)
 	: m_IsRotating(isRotating),
 	m_CameraPosition(0.f, 0.f, 0.f), m_CameraRotation(0.f), 
 	m_CameraTranslationSpeed(40.f), m_CameraRotationSpeed(180.f)
 {
+	m_AspectRatio = aspectRatio;
 	m_Camera = CameraOrtho(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
 
 	Singletons::EventDispatcher::Instance()->RegisterEvent(new Event::Event<float, float>(EVENT_NAME_WINDOWRESIZE, &OnResize));
@@ -47,6 +48,9 @@ void CameraOrthoController::OnStop()
 
 void CameraOrthoController::OnUpdate(float deltatime)
 {
+	m_Camera.SetPos(m_CameraPosition);
+	m_Camera.SetRotation(m_CameraRotation);
+
 	const glm::mat4& pv = m_Camera.GetProjViewMat();
 	{
 		m_Entity->Layer()->GetShader()->Bind();

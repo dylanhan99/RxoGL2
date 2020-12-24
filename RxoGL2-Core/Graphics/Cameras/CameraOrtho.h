@@ -23,7 +23,7 @@ public:
 	inline const glm::mat4& GetViewMat()		const { return m_ViewMat; }
 	inline const glm::mat4& GetProjViewMat()	const { return m_ProjViewMat; }
 	inline const glm::vec3& GetPos()			const { return m_Pos; }
-	inline		 void		SetPos(float& x, float& y, float& z)	{ m_Pos = { x, y, z };  CalcViewMat(); }
+	inline		 void		SetPos(const float& x, const float& y, const float& z)	{ m_Pos = { x, y, z };  CalcViewMat(); }
 	inline		 void		SetPos(glm::vec3& newPos)				{ m_Pos = newPos;		CalcViewMat(); }
 	inline		 void		SetRotation(float& rotation)			{ m_Rotation = rotation;  CalcViewMat(); }
 };
