@@ -184,6 +184,7 @@ namespace ECS
 			//OnUpdateFunction	= [&](float deltatime) { ((T*)Instance)->OnUpdate(deltatime); };
 		
 			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
+			InstantiateFunction();
 			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
 			return static_cast<T*>(Instance);
 		}

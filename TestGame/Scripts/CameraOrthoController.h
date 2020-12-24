@@ -15,7 +15,7 @@ private:
 	float		m_CameraTranslationSpeed;
 	float		m_CameraRotationSpeed;
 public:
-	CameraOrthoController(float aspectRatio, bool rotation = false);
+	CameraOrthoController(const float& aspectRatio, bool rotation = false);
 	~CameraOrthoController();
 
 	virtual void OnAwake() override;

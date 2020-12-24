@@ -14,11 +14,16 @@ MainScene::MainScene()
 	l1.Add(e1);
 	AddLayer(l1);
 
-	//const float ratio = 1080 / 960;
-	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController>(1080/960);
+	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController, float>(960.f / 540.f);
 
-	e1.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(20.f, 20.f);
+	e1.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(200.f, 200.f);
 	e1.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
+
+	s1.Bind();
+	int texIDs[32];
+	for (int i = 0; i < 32; i++)
+		texIDs[i] = i;
+	s1.SetUniform1iv("u_Textures", 32, texIDs);
 }
 
 MainScene::~MainScene()
