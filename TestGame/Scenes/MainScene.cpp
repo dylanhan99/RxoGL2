@@ -13,25 +13,25 @@ MainScene::MainScene()
 	Singletons::FontCache::Instance()->AddFont("arial", "../res/Fonts/arial.ttf");
 
 	l1.Add(camera);
-	l1.Add(eSprite);
-	l1.Add(eLabel);
+	//l1.Add(eSprite);
 	l1.Add(eTexture);
 	l1.Add(eTextureSheet);
+	//l1.Add(eLabel);
 	AddLayer(l1);
 
-	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController, float>(960.f / 540.f);
+	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController>(960.f / 540.f);
 
 	eSprite.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eSprite.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
 
+	eTexture.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(70.f, 70.f);
+	eTexture.AddComponent<ECS::Sprite>("yo", "../res/Textures/yo2.png", 0.23f, 0.38f, 0.76f, 0.f);
+
+	eTextureSheet.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(40.f, 50.f);
+	eTextureSheet.AddComponent<ECS::Sprite>("yo1", "../res/Textures/yo1.png", 0.f, 0.f, 0.f, 1.f, true)->Add("yo1", 8.f, 8.f, 8.f, 8.f);
+
 	eLabel.AddComponent<ECS::Transform>(0, 0, 0);
-	eLabel.AddComponent<ECS::Label>("TriHard", "arial");
-
-	eTexture.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(30.f, 30.f);
-	eTexture.AddComponent<ECS::Sprite>("yo", "../res/Textures/yo.png", 1.f, 1.f, 1.f, 1.f);
-
-	eTextureSheet.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(10.f, 30.f);
-	eTextureSheet.AddComponent<ECS::Sprite>("yoSheet", "../res/Textures/yo.png", 0.f, 0.f, 0.f, 1.f);// , true);
+	eLabel.AddComponent<ECS::Label>("TriHard", "arial", 1.f);
 
 	s1.Bind();
 	int texIDs[32];

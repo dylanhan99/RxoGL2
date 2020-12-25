@@ -13,9 +13,9 @@ private:
 	Layer l1;
 	ECS::Entity camera;
 	ECS::Entity eSprite;
-	ECS::Entity eLabel;
 	ECS::Entity eTexture;
 	ECS::Entity eTextureSheet;
+	ECS::Entity eLabel;
 
 public:
 	MainScene();

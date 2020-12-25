@@ -7,8 +7,9 @@
 namespace ECS
 {
 	//Sprite
-	Sprite::Sprite(const std::string& textureName, const std::string& filePath, float r, float g, float b, float a, bool isSpriteSheet)
-		: m_TextureData(Singletons::TextureCache::Instance()->AddTexture(filePath)),
+	Sprite::Sprite(std::string textureName, std::string filePath, float r, float g, float b, float a, bool isSpriteSheet)
+		: m_FrameName(textureName),
+		m_TextureData(Singletons::TextureCache::Instance()->AddTexture(filePath)),
 		m_TexCoords({ glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 0.0f), glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 1.0f) }),
 		m_Color({r, g, b, a}),
 		m_IsSpriteSheet(isSpriteSheet)
@@ -51,8 +52,8 @@ namespace ECS
 	}
 
 	// Label
-	Label::Label(std::string text, std::string fontName)
-		: m_Text(text), m_FontName(fontName), m_Scale(1.f), m_Color(0.f, 0.f, 0.f, 1.f)
+	Label::Label(std::string text, std::string fontName, float scale)
+		: m_Text(text), m_FontName(fontName), m_Scale(scale), m_Color(0.f, 0.f, 0.f, 1.f)
 	{
 
 	}
