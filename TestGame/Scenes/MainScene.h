@@ -12,7 +12,10 @@ private:
 
 	Layer l1;
 	ECS::Entity camera;
-	ECS::Entity e1;
+	ECS::Entity eSprite;
+	ECS::Entity eTexture;
+	ECS::Entity eTextureSheet;
+	ECS::Entity eLabel;
 
 public:
 	MainScene();

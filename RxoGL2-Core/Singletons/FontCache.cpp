@@ -7,7 +7,7 @@ namespace Singletons
 
 	sPtrFont FontCache::AddFont(std::string name, std::string path)
 	{
-		m_Fonts[name] = std::make_shared<Font>(path, 48);
+		m_Fonts[name] = std::make_shared<Font>(path, 36);
 		return GetFont(name);
 	}
 }

@@ -31,13 +31,14 @@ namespace ECS
 			glm::vec2 bl, br, tr, tl;
 		};
 	private:
+		std::string m_FrameName;
 		sPtrTextureData m_TextureData;
 		RXOcolor m_Color;
 		TexCoords m_TexCoords;
 		std::unordered_map<std::string, TexCoords> m_TexCoordsCache;
 		bool m_IsSpriteSheet = false;
 	public:
-		Sprite(const std::string& textureName, const std::string& filePath, float r, float g, float b, float a, bool isTextureSheet = false);
+		Sprite(std::string textureName, std::string filePath, float r, float g, float b, float a, bool isTextureSheet = false);
 		Sprite(float r, float g, float b, float a);
 
 		void OnDraw() override;
@@ -47,12 +48,12 @@ namespace ECS
 		// Getters/Setters
 		inline const sPtrTextureData& GetTexture() const { return m_TextureData; }
 		inline const RXOcolor& GetColor() const { return m_Color; }
-		inline const TexCoords& GetCoords(std::string framename = "") const
+		inline const TexCoords& GetCoords() const
 		{
 			switch (m_IsSpriteSheet) {
 			case true:
 				if (!m_TexCoordsCache.empty())
-					return m_TexCoordsCache.at(framename);
+					return m_TexCoordsCache.at(m_FrameName);
 				break;
 			default:
 				return m_TexCoords;
@@ -68,7 +69,7 @@ namespace ECS
 		std::string m_FontName;
 		RXOcolor m_Color;
 	public:
-		Label(std::string text, std::string fontName);
+		Label(std::string text, std::string fontName, float scale);
 		void OnDraw() override;
 
 		// Getters/Setters
