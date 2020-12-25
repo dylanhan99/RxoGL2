@@ -23,9 +23,6 @@ void main()
         }
         else
         {
-            //vec4 texCol = texture(u_Textures[index - 1], v_TexCoord);
-            //vec4 tempCol = texCol * 0.5 + v_Col * (1 - 0.5);
-            //o_Col = tempCol;
             o_Col = texture(u_Textures[index - 1], v_TexCoord);
         }
     }
