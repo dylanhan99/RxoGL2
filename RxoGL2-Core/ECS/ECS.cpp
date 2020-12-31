@@ -61,5 +61,4 @@ namespace ECS
 			}),
 			std::end(m_Entities));
 	}
-
 }
