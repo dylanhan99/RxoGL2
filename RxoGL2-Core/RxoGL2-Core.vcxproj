@@ -159,7 +159,6 @@
     <ClCompile Include="Layering\Group.cpp" />
     <ClCompile Include="Layering\Layer.cpp" />
     <ClCompile Include="Layering\Scene.cpp" />
-    <ClCompile Include="Event\Event.cpp" />
     <ClCompile Include="Singletons\EventCache.cpp" />
     <ClCompile Include="Singletons\FontCache.cpp" />
     <ClCompile Include="Singletons\TextureCache.cpp" />
