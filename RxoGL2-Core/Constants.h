@@ -19,6 +19,7 @@ class BatchRenderer2D;
 class Font;
 class Group;
 class Layer;
+class PhysicsManager;
 class Scene;
 class SceneMenu;
 class Shader;
@@ -29,6 +30,8 @@ class Window;
 namespace ECS
 {
 	class Component;
+	class BoxCollider;
+	class CollidableComponent;
 	class Entity;
 	class EntityList;
 	class NativeScript;
@@ -89,6 +92,7 @@ typedef std::shared_ptr<BatchRenderer2D> sPtrBatchRenderer2D;
 typedef std::shared_ptr<Font> sPtrFont;
 typedef std::shared_ptr<Group> sPtrGroup;
 typedef std::shared_ptr<Layer> sPtrLayer;
+typedef std::shared_ptr<PhysicsManager> sPtrPhysicsManager;
 typedef std::shared_ptr<Scene> sPtrScene;
 typedef std::shared_ptr<SceneMenu> sPtrSceneMenu;
 typedef std::shared_ptr<Shader> sPtrShader;
@@ -98,6 +102,8 @@ typedef std::shared_ptr<Window> sPtrWindow;
 
 namespace ECS
 {
+	typedef std::shared_ptr<BoxCollider>	sPtrBoxCollider;
+	typedef std::shared_ptr<CollidableComponent>	sPtrCollidableComponent;
 	typedef std::shared_ptr<Component>				sPtrComponent;
 	typedef std::shared_ptr<Entity>					sPtrEntity;
 	typedef std::shared_ptr<EntityList>				sPtrEntityList;

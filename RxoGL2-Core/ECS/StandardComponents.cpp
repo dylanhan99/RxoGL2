@@ -2,6 +2,7 @@
 #include "../Singletons/TextureCache.h"
 #include "../Graphics/Renderers/BatchRenderer.h"
 #include "../Layering/Layer.h"
+#include "../Physics/PhysicsManager.h"
 #include "../Utils/Timer.h"
 
 namespace ECS
@@ -60,5 +61,11 @@ namespace ECS
 	void Label::OnDraw()
 	{
 		m_Entity->Layer()->GetRenderer()->Submit(this);
+	}
+
+	// BoxCollider : Collidable
+	void BoxCollider::AddToPhysicsManager()
+	{
+		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<BoxCollider>(m_sPtrThis));
 	}
 }

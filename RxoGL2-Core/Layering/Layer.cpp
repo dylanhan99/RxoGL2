@@ -1,6 +1,7 @@
 #include "Layer.h"
 #include "../Graphics/Renderers/BatchRenderer.h"
 #include "../Graphics/Shaders/Shader.h"
+#include "../Physics/PhysicsManager.h"
 
 Layer::Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix)
 	: m_Renderer(std::make_shared<BatchRenderer2D>(/*renderer*/)), 

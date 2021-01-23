@@ -78,4 +78,17 @@ namespace ECS
 		inline const std::string&	GetFontName()	const { return m_FontName; }
 		inline const RXOcolor&		GetColor()		const { return m_Color; }
 	};
+
+	class BoxCollider : public CollidableComponent
+	{
+	private:
+		RXOposition m_Position;
+		RXOsize m_Size;
+
+		void AddToPhysicsManager() override;
+	public:
+		// Getters/Setters
+		inline		 RXOposition&	GetPosition() { return m_Position; }
+		inline const RXOsize&		GetSize() const { return m_Size; }
+	};
 }

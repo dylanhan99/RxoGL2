@@ -3,11 +3,19 @@
 
 #include "Scenes/MainScene.h"
 
+//#include "Physics/PhysicsManager.h"
+
 int main()
 {
 	auto App = Application::Instance();
 	App->GetSceneMenu()->RegisterScene<MainScene>("MainScene");
 	App->GetSceneMenu()->LoadScene("MainScene");
+
+	//{
+	//	PhysicsManager yo;
+	//	yo.OnUpdate(0.f);
+	//}
+
 	App->ApplicationLoop();
 	return 0;
 }

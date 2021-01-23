@@ -127,6 +127,28 @@ namespace ECS
 
 	};
 
+	class CollidableComponent : public Component
+	{
+	private:
+		bool m_IsColliding;
+
+		virtual void AddToPhysicsManager() = 0;
+	public:
+		CollidableComponent();
+		void OnAwake() override;
+		virtual bool CheckCollision(sPtrCollidableComponent other) {}
+		// Get the vector projection of this component by parsing an axis in.
+		virtual glm::vec3 Project(glm::vec3 vector, glm::vec3 plane) {}
+
+		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
+		virtual void OnCollisionStay(sPtrCollidableComponent component) {}
+		virtual void OnCollisionExit(sPtrCollidableComponent component) {}
+
+		// Getters/Setters
+		inline const bool& IsColliding() const { return m_IsColliding; }
+		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
+	};
+
 	// T meaning Script Type
 	//template <typename T, typename... TArgs>
 	class NativeScriptComponent : public Component
