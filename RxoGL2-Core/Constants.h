@@ -30,7 +30,8 @@ class Window;
 namespace ECS
 {
 	class Component;
-	class BoxCollider;
+	class PolygonCollider;
+	class CircleCollider;
 	class CollidableComponent;
 	class Entity;
 	class EntityList;
@@ -102,7 +103,8 @@ typedef std::shared_ptr<Window> sPtrWindow;
 
 namespace ECS
 {
-	typedef std::shared_ptr<BoxCollider>	sPtrBoxCollider;
+	typedef std::shared_ptr<PolygonCollider>		sPtrPolygonCollider;
+	typedef std::shared_ptr<CircleCollider>			sPtrCircleCollider;
 	typedef std::shared_ptr<CollidableComponent>	sPtrCollidableComponent;
 	typedef std::shared_ptr<Component>				sPtrComponent;
 	typedef std::shared_ptr<Entity>					sPtrEntity;

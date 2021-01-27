@@ -25,5 +25,7 @@ public:
 	void OnUpdate(float deltatime);
     void Add(ECS::sPtrCollidableComponent component);
 
-    static bool BoxBox(ECS::sPtrBoxCollider c1, ECS::sPtrBoxCollider c2);
+    static bool PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2);
+    static bool CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCollider c2);
+    static bool PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2);
 };

@@ -130,21 +130,24 @@ namespace ECS
 	class CollidableComponent : public Component
 	{
 	private:
+		RXOposition m_Position;
+
 		bool m_IsColliding;
 
 		virtual void AddToPhysicsManager() = 0;
 	public:
-		CollidableComponent();
+		CollidableComponent(RXOposition position);
 		void OnAwake() override;
-		virtual bool CheckCollision(sPtrCollidableComponent other) {}
+		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 		// Get the vector projection of this component by parsing an axis in.
-		virtual glm::vec3 Project(glm::vec3 vector, glm::vec3 plane) {}
+		virtual glm::vec3 Project(glm::vec3 vector, glm::vec3 plane) { return glm::vec3(); }
 
 		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
 		virtual void OnCollisionStay(sPtrCollidableComponent component) {}
 		virtual void OnCollisionExit(sPtrCollidableComponent component) {}
 
 		// Getters/Setters
+		inline		 RXOposition& GetPosition() { return m_Position; }
 		inline const bool& IsColliding() const { return m_IsColliding; }
 		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
 	};

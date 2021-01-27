@@ -1,5 +1,6 @@
 #include "PhysicsManager.h"
 #include "../ECS/StandardComponents.h"
+#include <gtx/perpendicular.hpp>
 
 void PhysicsManager::OnUpdate(float deltatime)
 {
@@ -49,12 +50,26 @@ void PhysicsManager::Add(ECS::sPtrCollidableComponent component)
 	m_Collidables.push_back(component);
 }
 
-bool PhysicsManager::BoxBox(ECS::sPtrBoxCollider c1, ECS::sPtrBoxCollider c2)
+bool PhysicsManager::PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2)
 {
-	if (c1->GetPosition().x						< c2->GetPosition().x + c2->GetSize().x &&
-		c1->GetPosition().x + c1->GetSize().x	> c2->GetPosition().x					&&
-		c1->GetPosition().y						< c2->GetPosition().y + c2->GetSize().y &&
-		c1->GetPosition().y + c1->GetSize().y	> c2->GetPosition().y) 
+	
+	return false;
+}
+
+bool PhysicsManager::CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCollider c2)
+{
+	if (glm::distance(c1->GetPosition(), c2->GetPosition()) < (c1->GetRadius() + c2->GetRadius()))
 		return true;
+	return false;
+}
+
+bool PhysicsManager::PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2)
+{
+	glm::vec3 perpendicularPlane;
+	glm::perp(perpendicularPlane, c1->GetPoints()[0]);
+	for (auto& point : c1->GetPoints())
+	{
+		
+	}
 	return false;
 }

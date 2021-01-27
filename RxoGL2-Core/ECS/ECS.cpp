@@ -64,8 +64,9 @@ namespace ECS
 	}
 
 	// Collidable Component
-	CollidableComponent::CollidableComponent()
-		: m_IsColliding(false)
+	CollidableComponent::CollidableComponent(RXOposition position)
+		: m_Position(position),
+		m_IsColliding(false)
 	{
 		
 	}
@@ -73,10 +74,10 @@ namespace ECS
 	{
 		AddToPhysicsManager();
 	}
-	bool CollidableComponent::CheckCollision(sPtrCollidableComponent other)
-	{
-		return false;
-	}
+	//bool CollidableComponent::CheckCollision(sPtrCollidableComponent other)
+	//{
+	//	return false;
+	//}
 
 	glm::vec3 Project(glm::vec3 vector, glm::vec3 plane)
 	{

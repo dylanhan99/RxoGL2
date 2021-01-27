@@ -79,16 +79,25 @@ namespace ECS
 		inline const RXOcolor&		GetColor()		const { return m_Color; }
 	};
 
-	class BoxCollider : public CollidableComponent
+	class PolygonCollider : public CollidableComponent
 	{
 	private:
-		RXOposition m_Position;
-		RXOsize m_Size;
+		std::vector<glm::vec3> m_ColliderPointCoords;
 
 		void AddToPhysicsManager() override;
 	public:
+		PolygonCollider(RXOposition position, std::vector<glm::vec3> coords /*= Default Coords*/);
+
 		// Getters/Setters
-		inline		 RXOposition&	GetPosition() { return m_Position; }
-		inline const RXOsize&		GetSize() const { return m_Size; }
+		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
+	};
+
+	class CircleCollider : public CollidableComponent
+	{
+	private:
+		float m_Radius;
+	public:
+		// Getters/Setters
+		inline const float& GetRadius() const { return m_Radius; }
 	};
 }

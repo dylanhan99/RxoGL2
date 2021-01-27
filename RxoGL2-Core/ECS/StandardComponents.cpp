@@ -64,8 +64,14 @@ namespace ECS
 	}
 
 	// BoxCollider : Collidable
-	void BoxCollider::AddToPhysicsManager()
+	PolygonCollider::PolygonCollider(RXOposition position, std::vector<glm::vec3> coords)
+		: CollidableComponent(position),
+		m_ColliderCoords(coords)
 	{
-		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<BoxCollider>(m_sPtrThis));
+
+	}
+	void PolygonCollider::AddToPhysicsManager()
+	{
+		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<PolygonCollider>(m_sPtrThis));
 	}
 }
