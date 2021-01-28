@@ -129,18 +129,18 @@ namespace ECS
 
 	class CollidableComponent : public Component
 	{
-	private:
+	protected:
 		RXOposition m_Position;
-
 		bool m_IsColliding;
-
+	private:
 		virtual void AddToPhysicsManager() = 0;
 	public:
 		CollidableComponent(RXOposition position);
 		void OnAwake() override;
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
-		// Get the vector projection of this component by parsing an axis in.
-		virtual glm::vec3 Project(glm::vec3 vector, glm::vec3 plane) { return glm::vec3(); }
+		/*Get the vector projection (range of the dot product in float) 
+		  of this component by parsing an edge in. */
+		virtual std::pair<float, float> Project(glm::vec3 edge) = 0;
 
 		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
 		virtual void OnCollisionStay(sPtrCollidableComponent component) {}

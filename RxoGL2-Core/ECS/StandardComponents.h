@@ -87,9 +87,11 @@ namespace ECS
 		void AddToPhysicsManager() override;
 	public:
 		PolygonCollider(RXOposition position, std::vector<glm::vec3> coords /*= Default Coords*/);
+		std::pair<float, float> Project(glm::vec3 edge) override;
 
 		// Getters/Setters
 		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
+		const std::pair<glm::vec3, glm::vec3> GetMinMax(glm::vec3 edge) const;
 	};
 
 	class CircleCollider : public CollidableComponent
@@ -97,6 +99,7 @@ namespace ECS
 	private:
 		float m_Radius;
 	public:
+		std::pair<float, float> Project(glm::vec3 edge) override;
 		// Getters/Setters
 		inline const float& GetRadius() const { return m_Radius; }
 	};

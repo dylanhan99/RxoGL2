@@ -65,11 +65,24 @@ bool PhysicsManager::CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCol
 
 bool PhysicsManager::PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2)
 {
-	glm::vec3 perpendicularPlane;
-	glm::perp(perpendicularPlane, c1->GetPoints()[0]);
-	for (auto& point : c1->GetPoints())
+	auto& c1Points = c1->GetPoints();
+	auto edge1 = c1Points[0] - c1Points[1];
+	glm::vec3 perpPlaneOfEdge1(-edge1.y, edge1.x, edge1.z);
+	/*
+		Somehow get the minimum and maximum points relative to perpPlaneOfEdge1;
+			This can be a function built into PolygonCollider.
+			> Parse edge1 into std::pair<float, float> GetMinMax(glm::vec3 edge);
+		Parse the two points into the glm::dot(a, b) function;
+		Do the same for the circle.
+		If the range overlaps, do second test.
+		If not, return false.
+	*/
+	auto polyRange = c1->Project(edge1);
+	auto circRange = c2->Project(edge1);
+	if ((polyRange.first < circRange.second && polyRange.first > circRange.second) ||
+		(circRange.first < polyRange.second && circRange.first > polyRange.second))
 	{
-		
+		return true;
 	}
 	return false;
 }

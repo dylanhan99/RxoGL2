@@ -3,6 +3,8 @@
 
 #include "Scenes/MainScene.h"
 
+
+#include <gtx/perpendicular.hpp>
 //#include "Physics/PhysicsManager.h"
 
 int main()

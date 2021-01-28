@@ -66,12 +66,33 @@ namespace ECS
 	// BoxCollider : Collidable
 	PolygonCollider::PolygonCollider(RXOposition position, std::vector<glm::vec3> coords)
 		: CollidableComponent(position),
-		m_ColliderCoords(coords)
+		m_ColliderPointCoords(coords)
 	{
 
 	}
 	void PolygonCollider::AddToPhysicsManager()
 	{
 		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<PolygonCollider>(m_sPtrThis));
+	}
+	std::pair<float, float> PolygonCollider::Project(glm::vec3 edge)
+	{
+		auto minmax = GetMinMax(edge);
+		auto dotP1 = minmax.first.x * edge.x + minmax.first.y * edge.y;
+		auto dotP2 = minmax.second.x * edge.x + minmax.second.y * edge.y;
+		return std::pair<float, float>(dotP1, dotP2);
+	}
+	const std::pair<glm::vec3, glm::vec3> PolygonCollider::GetMinMax(glm::vec3 edge) const
+	{
+		return std::pair<glm::vec3, glm::vec3>(min, max);
+	}
+
+	// CircleCollider :: Collidable
+	std::pair<float, float> CircleCollider::Project(glm::vec3 edge)
+	{
+		auto min = m_Position - RXOposition(m_Radius, 0.f, 0.f, 0.f);
+		auto max = m_Position + RXOposition(m_Radius, 0.f, 0.f, 0.f);
+		auto dotC1 = min.x * edge.x + min.y * edge.y;
+		auto dotC2= max.x * edge.x + max.y * edge.y;
+		return std::pair<float, float>(dotC1, dotC2);
 	}
 }
