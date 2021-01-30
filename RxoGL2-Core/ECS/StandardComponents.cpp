@@ -76,14 +76,17 @@ namespace ECS
 	}
 	std::pair<float, float> PolygonCollider::Project(glm::vec3 edge)
 	{
-		auto minmax = GetMinMax(edge);
-		auto dotP1 = minmax.first.x * edge.x + minmax.first.y * edge.y;
-		auto dotP2 = minmax.second.x * edge.x + minmax.second.y * edge.y;
-		return std::pair<float, float>(dotP1, dotP2);
-	}
-	const std::pair<glm::vec3, glm::vec3> PolygonCollider::GetMinMax(glm::vec3 edge) const
-	{
-		return std::pair<glm::vec3, glm::vec3>(min, max);
+		float min = NULL;
+		float max = NULL;
+		for (auto v : m_ColliderPointCoords)
+		{
+			float dot = v.x * edge.x + v.y * edge.y;
+			if (min == NULL || dot < min)
+				min = dot;
+			if (max == NULL || dot > max)
+				max = dot;
+		}
+		return std::pair<float, float>(min, max);
 	}
 
 	// CircleCollider :: Collidable
@@ -91,8 +94,8 @@ namespace ECS
 	{
 		auto min = m_Position - RXOposition(m_Radius, 0.f, 0.f, 0.f);
 		auto max = m_Position + RXOposition(m_Radius, 0.f, 0.f, 0.f);
-		auto dotC1 = min.x * edge.x + min.y * edge.y;
-		auto dotC2= max.x * edge.x + max.y * edge.y;
-		return std::pair<float, float>(dotC1, dotC2);
+		auto dotMin = min.x * edge.x + min.y * edge.y;
+		auto dotMax = max.x * edge.x + max.y * edge.y;
+		return std::pair<float, float>(dotMin, dotMax);
 	}
 }

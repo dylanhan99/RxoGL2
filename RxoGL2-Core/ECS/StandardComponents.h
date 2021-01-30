@@ -91,7 +91,6 @@ namespace ECS
 
 		// Getters/Setters
 		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
-		const std::pair<glm::vec3, glm::vec3> GetMinMax(glm::vec3 edge) const;
 	};
 
 	class CircleCollider : public CollidableComponent

@@ -138,7 +138,7 @@ namespace ECS
 		CollidableComponent(RXOposition position);
 		void OnAwake() override;
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
-		/*Get the vector projection (range of the dot product in float) 
+		/* Get the vector projection (range of the dot product in float) 
 		  of this component by parsing an edge in. */
 		virtual std::pair<float, float> Project(glm::vec3 edge) = 0;
 

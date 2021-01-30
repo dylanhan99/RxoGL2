@@ -78,11 +78,6 @@ namespace ECS
 	//{
 	//	return false;
 	//}
-
-	glm::vec3 Project(glm::vec3 vector, glm::vec3 plane)
-	{
-		return glm::proj(vector, plane);
-	}
 	//void CollidableComponent::AddToPhysicsManager()
 	//{
 	//	m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<CollidableComponent>(m_sPtrThis));
