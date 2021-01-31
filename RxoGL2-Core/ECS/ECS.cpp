@@ -64,22 +64,14 @@ namespace ECS
 	}
 
 	// Collidable Component
-	CollidableComponent::CollidableComponent(RXOposition position)
+	CollidableComponent::CollidableComponent(RXOposition* position)
 		: m_Position(position),
 		m_IsColliding(false)
 	{
 		
 	}
-	void CollidableComponent::OnAwake()
-	{
-		AddToPhysicsManager();
-	}
 	//bool CollidableComponent::CheckCollision(sPtrCollidableComponent other)
 	//{
 	//	return false;
-	//}
-	//void CollidableComponent::AddToPhysicsManager()
-	//{
-	//	m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<CollidableComponent>(m_sPtrThis));
 	//}
 }

@@ -2,21 +2,13 @@
 #include "Layering/Scene.h"
 
 #include "Scenes/MainScene.h"
-
-
-#include <gtx/perpendicular.hpp>
-//#include "Physics/PhysicsManager.h"
+#include "Utils/Timer.h"
 
 int main()
 {
 	auto App = Application::Instance();
 	App->GetSceneMenu()->RegisterScene<MainScene>("MainScene");
 	App->GetSceneMenu()->LoadScene("MainScene");
-
-	//{
-	//	PhysicsManager yo;
-	//	yo.OnUpdate(0.f);
-	//}
 
 	App->ApplicationLoop();
 	return 0;

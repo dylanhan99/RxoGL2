@@ -81,24 +81,33 @@ namespace ECS
 
 	class PolygonCollider : public CollidableComponent
 	{
+	protected:
+		void AddToPhysicsManager() override;
 	private:
 		std::vector<glm::vec3> m_ColliderPointCoords;
+		std::vector<glm::vec3> m_Edges;
 
-		void AddToPhysicsManager() override;
+		void UpdateEdges();
 	public:
-		PolygonCollider(RXOposition position, std::vector<glm::vec3> coords /*= Default Coords*/);
-		std::pair<float, float> Project(glm::vec3 edge) override;
+		PolygonCollider(RXOposition* position, std::vector<glm::vec3> coords /*= Default Coords*/);
+		void OnAwake() override { AddToPhysicsManager(); }
+		std::pair<float, float> Project(glm::vec3 plane) override;
 
 		// Getters/Setters
 		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
+		inline const std::vector<glm::vec3>& GetEdges() const { return m_Edges; }
+		const std::vector<glm::vec3>& GetPlanes();
 	};
 
 	class CircleCollider : public CollidableComponent
 	{
+	protected:
+		void AddToPhysicsManager() override;
 	private:
 		float m_Radius;
 	public:
-		std::pair<float, float> Project(glm::vec3 edge) override;
+		void OnAwake() override { AddToPhysicsManager(); }
+		std::pair<float, float> Project(glm::vec3 plane) override;
 		// Getters/Setters
 		inline const float& GetRadius() const { return m_Radius; }
 	};

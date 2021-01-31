@@ -58,7 +58,7 @@ namespace ECS
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
 			//m_Collidables.emplace_back(sPtr);
 
-			sPtr->OnAwake();
+			sPtr->OnAwake(); // collider having issue here...
 			//m_Components.emplace_back(std::move(sPtr)); pls use this in future
 			m_Components.push_back(sPtr);
 			return sPtr;
@@ -130,24 +130,22 @@ namespace ECS
 	class CollidableComponent : public Component
 	{
 	protected:
-		RXOposition m_Position;
+		RXOposition* m_Position;
 		bool m_IsColliding;
-	private:
 		virtual void AddToPhysicsManager() = 0;
 	public:
-		CollidableComponent(RXOposition position);
-		void OnAwake() override;
+		CollidableComponent(RXOposition* position);
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 		/* Get the vector projection (range of the dot product in float) 
 		  of this component by parsing an edge in. */
-		virtual std::pair<float, float> Project(glm::vec3 edge) = 0;
+		virtual std::pair<float, float> Project(glm::vec3 plane) = 0;
 
 		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
 		virtual void OnCollisionStay(sPtrCollidableComponent component) {}
 		virtual void OnCollisionExit(sPtrCollidableComponent component) {}
 
 		// Getters/Setters
-		inline		 RXOposition& GetPosition() { return m_Position; }
+		inline		 RXOposition& GetPosition() { return *m_Position; }
 		inline const bool& IsColliding() const { return m_IsColliding; }
 		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
 	};

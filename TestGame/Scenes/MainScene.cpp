@@ -24,11 +24,18 @@ MainScene::MainScene()
 	eSprite.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eSprite.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
 
+	std::vector<glm::vec3> colliderCoords;
+	colliderCoords.push_back(glm::vec3(0.f, 0.f, 0.f));
+	colliderCoords.push_back(glm::vec3(0.f, 1.f, 0.f));
+	colliderCoords.push_back(glm::vec3(1.f, 1.f, 0.f));
+	colliderCoords.push_back(glm::vec3(1.f, 0.f, 0.f));
 	eTexture.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(70.f, 70.f);
 	eTexture.AddComponent<ECS::Sprite>("yo", "../res/Textures/yo2.png", 0.23f, 0.38f, 0.76f, 0.f);
+	eTexture.AddComponent<ECS::PolygonCollider>(&(eSprite.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
 
 	eTextureSheet.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(40.f, 50.f);
 	eTextureSheet.AddComponent<ECS::Sprite>("yo1", "../res/Textures/yo1.png", 0.f, 0.f, 0.f, 1.f, true)->Add("yo1", 8.f, 8.f, 8.f, 8.f);
+	eTextureSheet.AddComponent<ECS::PolygonCollider>(&(eTextureSheet.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
 
 	eLabel.AddComponent<ECS::Transform>(0, 0, 0);
 	eLabel.AddComponent<ECS::Label>("TriHard", "arial", 1.f);
