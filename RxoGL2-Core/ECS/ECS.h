@@ -135,10 +135,10 @@ namespace ECS
 		virtual void AddToPhysicsManager() = 0;
 	public:
 		CollidableComponent(RXOposition* position);
-		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 		/* Get the vector projection (range of the dot product in float) 
 		  of this component by parsing an edge in. */
 		virtual std::pair<float, float> Project(glm::vec3 plane) = 0;
+		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 
 		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
 		virtual void OnCollisionStay(sPtrCollidableComponent component) {}

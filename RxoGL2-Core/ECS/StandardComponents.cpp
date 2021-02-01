@@ -63,7 +63,7 @@ namespace ECS
 		m_Entity->Layer()->GetRenderer()->Submit(this);
 	}
 
-	// BoxCollider : Collidable
+	// PolygonCollider : Collidable
 	PolygonCollider::PolygonCollider(RXOposition* position, std::vector<glm::vec3> coords)
 		: CollidableComponent(position),
 		m_ColliderPointCoords(coords)

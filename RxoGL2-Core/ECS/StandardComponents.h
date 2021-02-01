@@ -92,6 +92,7 @@ namespace ECS
 		PolygonCollider(RXOposition* position, std::vector<glm::vec3> coords /*= Default Coords*/);
 		void OnAwake() override { AddToPhysicsManager(); }
 		std::pair<float, float> Project(glm::vec3 plane) override;
+		bool CheckCollision(sPtrCollidableComponent other) override;
 
 		// Getters/Setters
 		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
@@ -108,6 +109,8 @@ namespace ECS
 	public:
 		void OnAwake() override { AddToPhysicsManager(); }
 		std::pair<float, float> Project(glm::vec3 plane) override;
+		bool CheckCollision(sPtrCollidableComponent other) override;
+
 		// Getters/Setters
 		inline const float& GetRadius() const { return m_Radius; }
 	};
