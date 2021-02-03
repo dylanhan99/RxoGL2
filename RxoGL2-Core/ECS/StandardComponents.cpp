@@ -108,6 +108,15 @@ namespace ECS
 		}
 		return std::pair<float, float>(min, max);
 	}
+	bool PolygonCollider::CheckCollision(sPtrCollidableComponent other)
+	{
+		auto thisCast  = std::static_pointer_cast<PolygonCollider>(m_sPtrThis);
+		if (std::dynamic_pointer_cast<PolygonCollider>(other))
+			return PhysicsManager::PolyPoly(thisCast, std::static_pointer_cast<PolygonCollider>(other));
+		if (std::dynamic_pointer_cast<CircleCollider>(other))
+			return PhysicsManager::PolyCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
+		return false;
+	}
 	const std::vector<glm::vec3>& PolygonCollider::GetPlanes()
 	{
 		UpdateEdges();
@@ -129,5 +138,14 @@ namespace ECS
 		auto dotMin = min.x * plane.x + min.y * plane.y;
 		auto dotMax = max.x * plane.x + max.y * plane.y;
 		return std::pair<float, float>(dotMin, dotMax);
+	}
+	bool CircleCollider::CheckCollision(sPtrCollidableComponent other)
+	{
+		auto thisCast = std::static_pointer_cast<CircleCollider>(m_sPtrThis);
+		if (std::dynamic_pointer_cast<PolygonCollider>(other))
+			return PhysicsManager::CircleCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
+		if (std::dynamic_pointer_cast<CircleCollider>(other))
+			return PhysicsManager::PolyCircle(std::static_pointer_cast<PolygonCollider>(other), thisCast);
+		return false;
 	}
 }

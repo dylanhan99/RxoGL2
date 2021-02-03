@@ -94,6 +94,10 @@ namespace ECS
 		std::pair<float, float> Project(glm::vec3 plane) override;
 		bool CheckCollision(sPtrCollidableComponent other) override;
 
+		void OnCollisionEnter(sPtrCollidableComponent component) override { std::cout << "Enter" << std::endl; }
+		void OnCollisionStay(sPtrCollidableComponent component)  override { }
+		void OnCollisionExit(sPtrCollidableComponent component)  override { }
+
 		// Getters/Setters
 		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
 		inline const std::vector<glm::vec3>& GetEdges() const { return m_Edges; }

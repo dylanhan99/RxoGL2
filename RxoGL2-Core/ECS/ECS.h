@@ -58,7 +58,7 @@ namespace ECS
 			m_ComponentBitSet[GetComponentTypeID<T>()] = true;
 			//m_Collidables.emplace_back(sPtr);
 
-			sPtr->OnAwake(); // collider having issue here...
+			//sPtr->OnAwake(); // Removed this line because entity calls all OnAwake in its on OnAwake
 			//m_Components.emplace_back(std::move(sPtr)); pls use this in future
 			m_Components.push_back(sPtr);
 			return sPtr;
