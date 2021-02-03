@@ -1,4 +1,5 @@
 #include "ECS.h"
+#include <gtx/projection.hpp>
 
 namespace ECS
 {
@@ -61,4 +62,16 @@ namespace ECS
 			}),
 			std::end(m_Entities));
 	}
+
+	// Collidable Component
+	CollidableComponent::CollidableComponent(RXOposition* position)
+		: m_Position(position),
+		m_IsColliding(false)
+	{
+		
+	}
+	//bool CollidableComponent::CheckCollision(sPtrCollidableComponent other)
+	//{
+	//	return false;
+	//}
 }

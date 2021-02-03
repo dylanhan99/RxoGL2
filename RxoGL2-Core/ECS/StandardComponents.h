@@ -78,4 +78,44 @@ namespace ECS
 		inline const std::string&	GetFontName()	const { return m_FontName; }
 		inline const RXOcolor&		GetColor()		const { return m_Color; }
 	};
+
+	class PolygonCollider : public CollidableComponent
+	{
+	protected:
+		void AddToPhysicsManager() override;
+	private:
+		std::vector<glm::vec3> m_ColliderPointCoords;
+		std::vector<glm::vec3> m_Edges;
+
+		void UpdateEdges();
+	public:
+		PolygonCollider(RXOposition* position, std::vector<glm::vec3> coords /*= Default Coords*/);
+		void OnAwake() override { AddToPhysicsManager(); }
+		std::pair<float, float> Project(glm::vec3 plane) override;
+		bool CheckCollision(sPtrCollidableComponent other) override;
+
+		void OnCollisionEnter(sPtrCollidableComponent component) override { std::cout << "Enter" << std::endl; }
+		void OnCollisionStay(sPtrCollidableComponent component)  override { }
+		void OnCollisionExit(sPtrCollidableComponent component)  override { }
+
+		// Getters/Setters
+		inline const std::vector<glm::vec3>& GetPoints() const { return m_ColliderPointCoords; }
+		inline const std::vector<glm::vec3>& GetEdges() const { return m_Edges; }
+		const std::vector<glm::vec3>& GetPlanes();
+	};
+
+	class CircleCollider : public CollidableComponent
+	{
+	protected:
+		void AddToPhysicsManager() override;
+	private:
+		float m_Radius;
+	public:
+		void OnAwake() override { AddToPhysicsManager(); }
+		std::pair<float, float> Project(glm::vec3 plane) override;
+		bool CheckCollision(sPtrCollidableComponent other) override;
+
+		// Getters/Setters
+		inline const float& GetRadius() const { return m_Radius; }
+	};
 }

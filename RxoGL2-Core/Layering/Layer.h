@@ -10,6 +10,7 @@ protected:
 	ECS::sPtrEntityList m_EntityList;
 	sPtrLayer m_sPtrThis;
 
+	sPtrPhysicsManager m_PhysicsManager;
 	std::vector<ECS::sPtrNativeScriptComponent> m_Scripts;
 public:
 	Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix);
@@ -24,7 +25,8 @@ public:
 
 	// Getters/Setters
 	inline const sPtrBatchRenderer2D	GetRenderer()	const { return m_Renderer; }
-	inline const sPtrShader				GetShader()	const { return m_Shader; }
+	inline const sPtrShader				GetShader()		const { return m_Shader; }
 	inline std::vector<ECS::sPtrEntity> GetEntitiesTag(std::string tag) { return m_EntityList->GetEntitiesTag(tag); }
+	inline const sPtrPhysicsManager		GetPhysicsManager() const { return m_PhysicsManager; }
 	inline const std::vector<ECS::sPtrNativeScriptComponent> GetScripts() const { return m_Scripts; }
 };
