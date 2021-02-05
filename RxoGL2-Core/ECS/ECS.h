@@ -2,6 +2,7 @@
 #include <functional>
 
 #include "../Constants.h"
+#include "../MonoBehaviour.h"
 
 namespace ECS
 {
@@ -17,7 +18,7 @@ namespace ECS
 		return typeID;
 	}
 	
-	class Entity
+	class Entity : public MonoBehaviour
 	{
 	private:
 		friend class EntityList;
@@ -26,7 +27,6 @@ namespace ECS
 		{ static EntityID lastID = 0; return lastID++; }
 
 		EntityID	m_EntID = NewEntityID();
-		bool		m_Active;
 		std::string m_Tag;
 		sPtrEntity m_sPtrThis;
 		mutable sPtrLayer	m_Layer;
@@ -34,13 +34,24 @@ namespace ECS
 		ComponentArray	 m_ComponentArray;
 		ComponentBitSet	 m_ComponentBitSet;
 
+		//Singletons::EventDispatcher m_LocalEventDispatcher;
+		// Flags
+		bool m_Active;
+		bool m_CollisionEnter;
+		bool m_CollisionStay;
+		bool m_CollisionExit;
+
 	public:
 		Entity(std::string tag = "") : m_Tag(tag) {}
-		virtual void OnAwake();
-		virtual void OnStart();
-		virtual void OnStop();
-		virtual void OnUpdate(float deltatime);
-		virtual void OnDraw();
+		void OnAwake() override;
+		void OnStart() override;
+		void OnStop() override;
+		void OnUpdate(float deltatime) override;
+		void OnDraw() override;
+
+		void OnCollisionEnter() override { }
+		void OnCollisionStay() override { }
+		void OnCollisionExit() override { }
 
 		template <typename T>
 		bool HasComponent() const
@@ -84,7 +95,7 @@ namespace ECS
 		}
 	};
 
-	class Component
+	class Component : public MonoBehaviour
 	{
 	private:
 		friend class Entity;
@@ -93,28 +104,28 @@ namespace ECS
 		std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
-		virtual void OnAwake() {}
-		virtual void OnStart() {}
-		virtual void OnStop() {}
-		virtual void OnUpdate(float deltatime) {}
-		virtual void OnDraw() {}
+		//void OnAwake() override {}
+		//void OnStart() override {}
+		//void OnStop() override {}
+		//void OnUpdate(float deltatime) override {}
+		//void OnDraw() override {}
 
 		// Getters/Setters
 		inline const sPtrEntity Entity() const { return m_Entity; }
 	};
 
-	class EntityList
+	class EntityList : public MonoBehaviour
 	{
 	private:
 		std::vector<sPtrEntity> m_Entities;
 		std::unordered_map<std::string, std::vector<sPtrEntity>> m_Entities_Tags;
 	public:
 		~EntityList() {}
-		void OnAwake();
-		void OnStart();
-		void OnStop();
-		void OnUpdate(float deltatime);
-		void OnDraw();
+		void OnAwake() override;
+		void OnStart() override;
+		void OnStop() override;
+		void OnUpdate(float deltatime) override;
+		void OnDraw() override;
 		sPtrEntity AddEntity(Entity& e);
 		void Refresh();
 
