@@ -228,17 +228,17 @@ namespace ECS
 	};
 
 	// To be a child of MonoBehaviour in the future.
-	class NativeScript 
+	class NativeScript : public MonoBehaviour
 	{
 	private:
 		friend class NativeScriptComponent;
 	protected:
 		sPtrEntity m_Entity;
 	public:
-		virtual void OnAwake() {}
-		virtual void OnStart() {}
-		virtual void OnStop() {}
-		virtual void OnUpdate(float deltatime) {}
-		virtual void OnDestroy() {}
+		//void OnAwake() {}
+		//void OnStart() {}
+		//void OnStop() {}
+		//void OnUpdate(float deltatime) {}
+		//void OnDestroy() {}
 	};
 }
