@@ -176,5 +176,8 @@
     <ClInclude Include="Physics\PhysicsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

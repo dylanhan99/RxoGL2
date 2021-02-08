@@ -2,6 +2,7 @@
 #include <functional>
 
 #include "../Constants.h"
+#include "../MonoBehaviour.h"
 
 namespace ECS
 {
@@ -17,7 +18,7 @@ namespace ECS
 		return typeID;
 	}
 	
-	class Entity
+	class Entity : public MonoBehaviour
 	{
 	private:
 		friend class EntityList;
@@ -26,7 +27,6 @@ namespace ECS
 		{ static EntityID lastID = 0; return lastID++; }
 
 		EntityID	m_EntID = NewEntityID();
-		bool		m_Active;
 		std::string m_Tag;
 		sPtrEntity m_sPtrThis;
 		mutable sPtrLayer	m_Layer;
@@ -34,14 +34,25 @@ namespace ECS
 		ComponentArray	 m_ComponentArray;
 		ComponentBitSet	 m_ComponentBitSet;
 
+		//Singletons::EventDispatcher m_LocalEventDispatcher;
+		// Flags
+		bool m_Active;
+		bool m_CollisionEnter;
+		bool m_CollisionStay;
+		bool m_CollisionExit;
+
 	public:
 		Entity(std::string tag = "") : m_Tag(tag) {}
-		virtual void OnAwake();
-		virtual void OnStart();
-		virtual void OnStop();
-		virtual void OnUpdate(float deltatime);
-		virtual void OnDraw();
+		void OnAwake() override;
+		void OnStart() override;
+		void OnStop() override;
+		void OnUpdate(float deltatime) override;
+		void OnDraw() override;
 
+		void OnCollisionEnter(sPtrCollidableComponent component) override;
+		void OnCollisionStay(sPtrCollidableComponent component) override;
+		void OnCollisionExit(sPtrCollidableComponent component) override;
+		
 		template <typename T>
 		bool HasComponent() const
 		{ return m_ComponentBitSet[GetComponentTypeID<T>()]; }
@@ -84,7 +95,7 @@ namespace ECS
 		}
 	};
 
-	class Component
+	class Component : public MonoBehaviour
 	{
 	private:
 		friend class Entity;
@@ -93,28 +104,28 @@ namespace ECS
 		std::shared_ptr<Component> m_sPtrThis;
 	public:
 		virtual ~Component() {}
-		virtual void OnAwake() {}
-		virtual void OnStart() {}
-		virtual void OnStop() {}
-		virtual void OnUpdate(float deltatime) {}
-		virtual void OnDraw() {}
+		//void OnAwake() override {}
+		//void OnStart() override {}
+		//void OnStop() override {}
+		//void OnUpdate(float deltatime) override {}
+		//void OnDraw() override {}
 
 		// Getters/Setters
 		inline const sPtrEntity Entity() const { return m_Entity; }
 	};
 
-	class EntityList
+	class EntityList : public MonoBehaviour
 	{
 	private:
 		std::vector<sPtrEntity> m_Entities;
 		std::unordered_map<std::string, std::vector<sPtrEntity>> m_Entities_Tags;
 	public:
 		~EntityList() {}
-		void OnAwake();
-		void OnStart();
-		void OnStop();
-		void OnUpdate(float deltatime);
-		void OnDraw();
+		void OnAwake() override;
+		void OnStart() override;
+		void OnStop() override;
+		void OnUpdate(float deltatime) override;
+		void OnDraw() override;
 		sPtrEntity AddEntity(Entity& e);
 		void Refresh();
 
@@ -140,9 +151,9 @@ namespace ECS
 		virtual std::pair<float, float> Project(glm::vec3 plane) = 0;
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 
-		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
-		virtual void OnCollisionStay(sPtrCollidableComponent component) {}
-		virtual void OnCollisionExit(sPtrCollidableComponent component) {}
+		void OnCollisionEnter(sPtrCollidableComponent component) override{}
+		void OnCollisionStay(sPtrCollidableComponent component)  override{}
+		void OnCollisionExit(sPtrCollidableComponent component)  override{}
 
 		// Getters/Setters
 		inline		 RXOposition& GetPosition() { return *m_Position; }
@@ -216,18 +227,18 @@ namespace ECS
 		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
 	};
 
-	// This is basically MonoBehaviour (how i understand it at least...)
-	class NativeScript 
+	// To be a child of MonoBehaviour in the future.
+	class NativeScript : public MonoBehaviour
 	{
 	private:
 		friend class NativeScriptComponent;
 	protected:
 		sPtrEntity m_Entity;
 	public:
-		virtual void OnAwake() {}
-		virtual void OnStart() {}
-		virtual void OnStop() {}
-		virtual void OnUpdate(float deltatime) {}
-		virtual void OnDestroy() {}
+		//void OnAwake() {}
+		//void OnStart() {}
+		//void OnStop() {}
+		//void OnUpdate(float deltatime) {}
+		//void OnDestroy() {}
 	};
 }

@@ -1,6 +1,5 @@
 #pragma once
 #include "ECS.h"
-#include "../Event/Event.h"
 #include "../Singletons/EventCache.h"
 
 namespace ECS

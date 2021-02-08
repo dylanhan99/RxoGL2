@@ -186,6 +186,7 @@
     <ClInclude Include="Layering\Group.h" />
     <ClInclude Include="Layering\Layer.h" />
     <ClInclude Include="Layering\Scene.h" />
+    <ClInclude Include="MonoBehaviour.h" />
     <ClInclude Include="Physics\PhysicsManager.h" />
     <ClInclude Include="Singletons\EventCache.h" />
     <ClInclude Include="Singletons\FontCache.h" />
