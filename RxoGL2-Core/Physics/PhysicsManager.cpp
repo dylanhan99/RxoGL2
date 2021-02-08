@@ -17,8 +17,8 @@ void PhysicsManager::OnUpdate(float deltatime)
 				first->IsColliding(true);
 				second->IsColliding(true);
 				m_CollidablesColliding.emplace(std::make_pair(first, second));
-				//first->OnCollisionEnter(second);
-				//second->OnCollisionEnter(first);
+				first->Entity()->OnCollisionEnter(second);
+				second->Entity()->OnCollisionEnter(first);
 			}
 		}
 	}
@@ -29,14 +29,14 @@ void PhysicsManager::OnUpdate(float deltatime)
 		auto second = pair.second;
 		if (first->CheckCollision(second))
 		{
-			//first->OnCollisionStay(second);
-			//second->OnCollisionStay(first);
+			first->Entity()->OnCollisionStay(second);
+			second->Entity()->OnCollisionStay(first);
 			continue;
 		}
 		first->IsColliding(false);
 		second->IsColliding(false);
-		//first->OnCollisionExit(second);
-		//second->OnCollisionExit(first);
+		first->Entity()->OnCollisionExit(second);
+		second->Entity()->OnCollisionExit(first);
 		m_CollidablesColliding.erase(pair);
 	}
 	//auto yo = std::make_pair(

@@ -24,6 +24,18 @@ namespace ECS
 	{
 		for (auto c : m_Components) c->OnDraw();
 	}
+	void Entity::OnCollisionEnter(sPtrCollidableComponent component)
+	{
+		for (auto c : m_Components) c->OnCollisionEnter(component);
+	}
+	void Entity::OnCollisionStay(sPtrCollidableComponent component)
+	{
+		for (auto c : m_Components) c->OnCollisionStay(component);
+	}
+	void Entity::OnCollisionExit(sPtrCollidableComponent component)
+	{
+		for (auto c : m_Components) c->OnCollisionExit(component);
+	}
 
 	// Entity List
 	void EntityList::OnAwake()

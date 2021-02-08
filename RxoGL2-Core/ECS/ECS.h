@@ -49,10 +49,10 @@ namespace ECS
 		void OnUpdate(float deltatime) override;
 		void OnDraw() override;
 
-		void OnCollisionEnter() override { }
-		void OnCollisionStay() override { }
-		void OnCollisionExit() override { }
-
+		void OnCollisionEnter(sPtrCollidableComponent component) override;
+		void OnCollisionStay(sPtrCollidableComponent component) override;
+		void OnCollisionExit(sPtrCollidableComponent component) override;
+		
 		template <typename T>
 		bool HasComponent() const
 		{ return m_ComponentBitSet[GetComponentTypeID<T>()]; }
@@ -151,9 +151,9 @@ namespace ECS
 		virtual std::pair<float, float> Project(glm::vec3 plane) = 0;
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
 
-		virtual void OnCollisionEnter(sPtrCollidableComponent component) {}
-		virtual void OnCollisionStay(sPtrCollidableComponent component) {}
-		virtual void OnCollisionExit(sPtrCollidableComponent component) {}
+		void OnCollisionEnter(sPtrCollidableComponent component) override{}
+		void OnCollisionStay(sPtrCollidableComponent component)  override{}
+		void OnCollisionExit(sPtrCollidableComponent component)  override{}
 
 		// Getters/Setters
 		inline		 RXOposition& GetPosition() { return *m_Position; }
@@ -227,7 +227,7 @@ namespace ECS
 		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
 	};
 
-	// This is basically MonoBehaviour (how i understand it at least...)
+	// To be a child of MonoBehaviour in the future.
 	class NativeScript 
 	{
 	private:
