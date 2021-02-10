@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Singletons/EventCache.h"
+#include "Singletons/InputModule.h"
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void key_callback			 (GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -68,21 +69,18 @@ void Window::SetViewPort(int& width, int& height)
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->mx = xpos;
-	//win->my = ypos;
+	Input::mx = xpos;
+	Input::my = ypos;
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->m_Keys[key] = action != GLFW_RELEASE;
+	Input::Keys[key] = action != GLFW_RELEASE;
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->m_MouseButtons[button] = action != GLFW_RELEASE;
+	Input::MouseButtons[button] = action != GLFW_RELEASE;
 }
 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
