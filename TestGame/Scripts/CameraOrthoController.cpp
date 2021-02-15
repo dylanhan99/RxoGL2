@@ -6,6 +6,8 @@
 #include "Layering/Layer.h"
 #include "Graphics/Shaders/Shader.h"
 
+#include "Singletons/InputModule.h"
+
 // Static variables used for OnEvent functions
 CameraOrtho	CameraOrthoController::m_Camera = CameraOrtho();
 float		CameraOrthoController::m_AspectRatio = NULL;
@@ -57,5 +59,10 @@ void CameraOrthoController::OnUpdate(float deltatime)
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3());
 		glm::mat4 mvp = pv * model;
 		m_Entity->Layer()->GetShader()->SetUniformMat4f("u_MVP", mvp);
+	}
+
+	{
+		if (Input::GetKeyDown(GLFW_KEY_W))
+			std::cout << "YOOOOOOOOOOOOO!!!!" << std::endl;
 	}
 }
