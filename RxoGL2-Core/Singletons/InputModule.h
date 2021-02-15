@@ -60,14 +60,14 @@ public:
 	// Keyboard
 	static bool GetKeyDown(unsigned int key)
 	{
-		if (key >= MAX_BUTTONS ||
+		if (key >= MAX_KEYS ||
 			m_Keys[key] == GLFW_RELEASE)
 			return false;
 		return m_Keys[key];
 	}
 	static bool GetKeyUp(unsigned int key)
 	{
-		if (key >= MAX_BUTTONS ||
+		if (key >= MAX_KEYS ||
 			m_Keys[key] != GLFW_RELEASE)
 			return false;
 		return m_Keys[key];

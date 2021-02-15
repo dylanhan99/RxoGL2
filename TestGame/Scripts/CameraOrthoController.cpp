@@ -61,8 +61,8 @@ void CameraOrthoController::OnUpdate(float deltatime)
 		m_Entity->Layer()->GetShader()->SetUniformMat4f("u_MVP", mvp);
 	}
 
+	if (Input::GetKeyDown(GLFW_KEY_W))
 	{
-		if (Input::GetKeyDown(GLFW_KEY_W))
-			std::cout << "YOOOOOOOOOOOOO!!!!" << std::endl;
+		std::cout << "YOOOOOOOOOOOOO!!!!" << std::endl;
 	}
 }
