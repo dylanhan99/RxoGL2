@@ -19,7 +19,7 @@ MainScene::MainScene()
 	//l1.Add(eLabel);
 	AddLayer(l1);
 
-	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController>(960.f / 540.f);
+	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController>(960.f / 540.f, true);
 
 	eSprite.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eSprite.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
