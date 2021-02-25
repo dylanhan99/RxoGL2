@@ -1,12 +1,11 @@
 #include "CameraOrthoController.h"
 #include <ext.hpp>
 
-#include "Singletons/EventCache.h"
 #include "ECS/ECS.h"
 #include "Layering/Layer.h"
 #include "Graphics/Shaders/Shader.h"
 
-#include "Singletons/InputModule.h"
+#include "Singletons/EventCache.h"
 
 // Static variables used for OnEvent functions
 CameraOrtho	CameraOrthoController::m_Camera = CameraOrtho();
@@ -50,43 +49,8 @@ void CameraOrthoController::OnStop()
 
 void CameraOrthoController::OnUpdate(float deltatime)
 {
-	if (Input::GetKeyDown(GLFW_KEY_D))
-	{
-		m_CameraPosition.x -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-		m_CameraPosition.y -= sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-	}
-	if (Input::GetKeyDown(GLFW_KEY_A))
-	{
-		m_CameraPosition.x += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-		m_CameraPosition.y += sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-	}
-
-	if (Input::GetKeyDown(GLFW_KEY_S))
-	{
-		m_CameraPosition.x += -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-		m_CameraPosition.y += cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-	}
-	if (Input::GetKeyDown(GLFW_KEY_W))
-	{
-		m_CameraPosition.x -= -sin(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-		m_CameraPosition.y -= cos(glm::radians(m_CameraRotation)) * m_CameraTranslationSpeed * deltatime;
-	}
-
-	if (m_IsRotating)
-	{
-		if (Input::GetKeyDown(GLFW_KEY_Q))
-			m_CameraRotation += m_CameraRotationSpeed * deltatime;
-		if (Input::GetKeyDown(GLFW_KEY_E))
-			m_CameraRotation -= m_CameraRotationSpeed * deltatime;
-
-		if (m_CameraRotation > 180.0f)
-			m_CameraRotation -= 360.0f;
-		else if (m_CameraRotation <= -180.0f)
-			m_CameraRotation += 360.0f;
-
-	}
-	m_Camera.SetPos(m_CameraPosition);
-	m_Camera.SetRotation(m_CameraRotation);
+	m_Camera.SetPos(CameraPosition());
+	m_Camera.SetRotation(CameraRotation());
 	const glm::mat4& pv = m_Camera.GetProjViewMat();
 	{
 		m_Entity->Layer()->GetShader()->Bind();

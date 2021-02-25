@@ -27,6 +27,7 @@ namespace ECS
 		{ static EntityID lastID = 0; return lastID++; }
 
 		EntityID	m_EntID = NewEntityID();
+		std::string m_Name;
 		std::string m_Tag;
 		sPtrEntity m_sPtrThis;
 		mutable sPtrLayer	m_Layer;
@@ -77,6 +78,7 @@ namespace ECS
 
 		// Getters/Setters
 		inline const	EntityID& ID()			const	{ return m_EntID; }
+		inline const	std::string	Name()		const	{ return m_Name; }
 		inline const	bool Active()			const	{ return m_Active; }
 		inline			void Active(bool state)			{ m_Active = state; }
 		inline const	std::string Tag()		const	{ return m_Tag; }
@@ -130,6 +132,13 @@ namespace ECS
 		void Refresh();
 
 		// Getters/Setters
+		inline sPtrEntity GetEntity(std::string name) 
+		{ 
+			for (auto e : m_Entities) 
+				if (e->Name() == name) 
+					return e;
+			return NULL;
+		}
 		inline std::vector<std::shared_ptr<ECS::Entity>> GetEntitiesTag(std::string tag) { return m_Entities_Tags[tag]; }
 	};
 

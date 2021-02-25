@@ -39,6 +39,7 @@ namespace ECS
 	class NativeScriptComponent;
 	class Sprite;
 	class Label;
+	class Transform;
 }
 
 namespace Singletons
@@ -113,6 +114,7 @@ namespace ECS
 	typedef std::shared_ptr<NativeScriptComponent>	sPtrNativeScriptComponent;
 	typedef std::shared_ptr<Sprite>					sPtrSprite;
 	typedef std::shared_ptr<Label>					sPtrLabel;
+	typedef std::shared_ptr<Transform>				sPtrTransform;
 }
 
 namespace Singletons

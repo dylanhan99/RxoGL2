@@ -26,6 +26,7 @@ public:
 	// Getters/Setters
 	inline const sPtrBatchRenderer2D	GetRenderer()	const { return m_Renderer; }
 	inline const sPtrShader				GetShader()		const { return m_Shader; }
+	inline ECS::sPtrEntity GetEntity(std::string name) { return m_EntityList->GetEntity(name); }
 	inline std::vector<ECS::sPtrEntity> GetEntitiesTag(std::string tag) { return m_EntityList->GetEntitiesTag(tag); }
 	inline const sPtrPhysicsManager		GetPhysicsManager() const { return m_PhysicsManager; }
 	inline const std::vector<ECS::sPtrNativeScriptComponent> GetScripts() const { return m_Scripts; }
