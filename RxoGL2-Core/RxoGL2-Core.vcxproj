@@ -162,6 +162,7 @@
     <ClCompile Include="Physics\PhysicsManager.cpp" />
     <ClCompile Include="Singletons\EventCache.cpp" />
     <ClCompile Include="Singletons\FontCache.cpp" />
+    <ClCompile Include="Singletons\InputModule.cpp" />
     <ClCompile Include="Singletons\TextureCache.cpp" />
     <ClCompile Include="Vendor\Imgui\imgui.cpp" />
     <ClCompile Include="Vendor\Imgui\imgui_demo.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Physics\PhysicsManager.h" />
     <ClInclude Include="Singletons\EventCache.h" />
     <ClInclude Include="Singletons\FontCache.h" />
+    <ClInclude Include="Singletons\InputModule.h" />
     <ClInclude Include="Singletons\TextureCache.h" />
     <ClInclude Include="Utils\Font.h" />
     <ClInclude Include="Utils\Timer.h" />

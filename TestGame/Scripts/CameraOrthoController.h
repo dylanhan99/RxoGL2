@@ -2,7 +2,7 @@
 #include "Graphics/Cameras/CameraOrtho.h"
 #include "ECS/ECS.h"
 
-class CameraOrthoController : public ECS::NativeScript
+class CameraOrthoController : public ECS::Component
 {
 private:
 	static CameraOrtho m_Camera;
@@ -18,10 +18,21 @@ public:
 	CameraOrthoController(const float& aspectRatio, bool rotation = false);
 	~CameraOrthoController();
 
-	virtual void OnAwake() override;
-	virtual void OnStart() override;
-	virtual void OnStop() override;
+	void OnAwake() override;
+	void OnStart() override;
+	void OnStop() override;
 	void OnUpdate(float deltatime) override;
+
+	// Getters/Setters
+	inline const bool IsRotating() const { return m_IsRotating; }
+	inline const glm::vec3 CameraPosition() const { return m_CameraPosition; }
+	inline void CameraPosition(float x, float y, float z) { m_CameraPosition.x = x; m_CameraPosition.y = y; m_CameraPosition.z = z; }
+	inline const float CameraRotation() const { return m_CameraRotation; }
+	inline void CameraRotation(float rotation) { m_CameraRotation = rotation; }
+	inline const float CameraTranslationSpeed() const { return m_CameraTranslationSpeed; }
+	inline void CameraTranslationSpeed(float speed) { m_CameraTranslationSpeed = speed; }
+	inline const float CameraRotationSpeed() const { return m_CameraRotationSpeed; }
+	inline void CameraRotationSpeed(float speed) { m_CameraRotationSpeed = speed; }
 
 	// Events
 	static void OnResize(float width, float height)

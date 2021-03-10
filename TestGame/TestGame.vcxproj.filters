@@ -24,12 +24,18 @@
     <ClCompile Include="Scripts\CameraOrthoController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scripts\PlayerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scenes\MainScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scripts\CameraOrthoController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scripts\PlayerController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

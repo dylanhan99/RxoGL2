@@ -1,10 +1,11 @@
 #include "CameraOrthoController.h"
 #include <ext.hpp>
 
-#include "Singletons/EventCache.h"
 #include "ECS/ECS.h"
 #include "Layering/Layer.h"
 #include "Graphics/Shaders/Shader.h"
+
+#include "Singletons/EventCache.h"
 
 // Static variables used for OnEvent functions
 CameraOrtho	CameraOrthoController::m_Camera = CameraOrtho();
@@ -48,9 +49,8 @@ void CameraOrthoController::OnStop()
 
 void CameraOrthoController::OnUpdate(float deltatime)
 {
-	m_Camera.SetPos(m_CameraPosition);
-	m_Camera.SetRotation(m_CameraRotation);
-
+	m_Camera.SetPos(CameraPosition());
+	m_Camera.SetRotation(CameraRotation());
 	const glm::mat4& pv = m_Camera.GetProjViewMat();
 	{
 		m_Entity->Layer()->GetShader()->Bind();

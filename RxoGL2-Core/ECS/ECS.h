@@ -27,6 +27,7 @@ namespace ECS
 		{ static EntityID lastID = 0; return lastID++; }
 
 		EntityID	m_EntID = NewEntityID();
+		std::string m_Name;
 		std::string m_Tag;
 		sPtrEntity m_sPtrThis;
 		mutable sPtrLayer	m_Layer;
@@ -42,7 +43,7 @@ namespace ECS
 		bool m_CollisionExit;
 
 	public:
-		Entity(std::string tag = "") : m_Tag(tag) {}
+		Entity(std::string name = "");
 		void OnAwake() override;
 		void OnStart() override;
 		void OnStop() override;
@@ -77,6 +78,7 @@ namespace ECS
 
 		// Getters/Setters
 		inline const	EntityID& ID()			const	{ return m_EntID; }
+		inline const	std::string	Name()		const	{ return m_Name; }
 		inline const	bool Active()			const	{ return m_Active; }
 		inline			void Active(bool state)			{ m_Active = state; }
 		inline const	std::string Tag()		const	{ return m_Tag; }
@@ -130,6 +132,13 @@ namespace ECS
 		void Refresh();
 
 		// Getters/Setters
+		inline sPtrEntity GetEntity(std::string name) 
+		{ 
+			for (auto e : m_Entities) 
+				if (e->Name() == name) 
+					return e;
+			return NULL;
+		}
 		inline std::vector<std::shared_ptr<ECS::Entity>> GetEntitiesTag(std::string tag) { return m_Entities_Tags[tag]; }
 	};
 
@@ -159,86 +168,5 @@ namespace ECS
 		inline		 RXOposition& GetPosition() { return *m_Position; }
 		inline const bool& IsColliding() const { return m_IsColliding; }
 		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
-	};
-
-	// T meaning Script Type
-	//template <typename T, typename... TArgs>
-	class NativeScriptComponent : public Component
-	{
-	public:
-		NativeScript* Instance = nullptr;
-
-		// InstantiateFunction & DestroyInstanceFunction are belonging to NativeScriptComponent.
-		std::function<void()> InstantiateFunction;
-		std::function<void()> DestroyInstanceFunction;
-
-		// The rest are lambdas for the script
-		//std::function<void()> OnPlayFunction;
-		//std::function<void()> OnStopFunction;
-		//std::function<void()> OnCreateFunction;
-		//std::function<void()> OnDestroyFunction;
-		//std::function<void(float)> OnUpdateFunction;
-
-		//NativeScriptComponent(TArgs&&... mArgs)
-		//{
-		//	InstantiateFunction = [&]() {
-		//		if (!m_Instance)
-		//		{
-		//			m_Instance = new T(std::forward<TArgs>(mArgs)...);
-		//			((T*)m_Instance)->m_Entity = m_Entity;
-		//		}
-		//	};
-		//	DestroyInstanceFunction = [&]() { delete (T*)m_Instance; m_Instance = nullptr; };
-		//
-		//	OnCreateFunction = [&]() { ((T*)m_Instance)->OnCreate(); };
-		//	OnDestroyFunction = [&]() { ((T*)m_Instance)->OnDestroy(); };
-		//	OnUpdateFunction = [&](float deltatime) { ((T*)m_Instance)->OnUpdate(deltatime); };
-		//
-		//	//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
-		//}
-
-		template <typename T, typename... TArgs>
-		T* Bind(TArgs&&... mArgs)
-		{
-			InstantiateFunction = [&]() {
-				if (!Instance)
-				{
-					//Instance = std::make_shared<T>(new T(std::forward<TArgs>(mArgs)...));
-					//Instance->m_Entity = m_Entity;
-					Instance = new T(std::forward<TArgs>(mArgs)...);
-					((T*)Instance)->m_Entity = m_Entity;
-				}
-			};
-			DestroyInstanceFunction = [&]() { delete (T*)Instance; Instance = nullptr; };
-			
-			//OnPlayFunction		= [&]() { ((T*)Instance)->OnPlay(); };
-			//OnStopFunction		= [&]() { ((T*)Instance)->OnStop(); };
-			//OnCreateFunction	= [&]() { ((T*)Instance)->OnCreate(); };
-			//OnDestroyFunction	= [&]() { ((T*)Instance)->OnDestroy(); };
-			//OnUpdateFunction	= [&](float deltatime) { ((T*)Instance)->OnUpdate(deltatime); };
-		
-			//NativeScriptManager::GetInstance()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_SptThis));
-			InstantiateFunction();
-			m_Entity->Layer()->AddScript(std::static_pointer_cast<NativeScriptComponent>(m_sPtrThis));
-			return static_cast<T*>(Instance);
-		}
-
-		// Getters/Setters
-		//inline NativeScript* GetInstance() { return m_ScriptInstance; }
-	};
-
-	// To be a child of MonoBehaviour in the future.
-	class NativeScript : public MonoBehaviour
-	{
-	private:
-		friend class NativeScriptComponent;
-	protected:
-		sPtrEntity m_Entity;
-	public:
-		//void OnAwake() {}
-		//void OnStart() {}
-		//void OnStop() {}
-		//void OnUpdate(float deltatime) {}
-		//void OnDestroy() {}
 	};
 }

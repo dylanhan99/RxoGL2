@@ -151,6 +151,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scenes\MainScene.cpp" />
     <ClCompile Include="Scripts\CameraOrthoController.cpp" />
+    <ClCompile Include="Scripts\PlayerController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RxoGL2-Core\RxoGL2-Core.vcxproj">
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Scenes\MainScene.h" />
     <ClInclude Include="Scripts\CameraOrthoController.h" />
+    <ClInclude Include="Scripts\PlayerController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

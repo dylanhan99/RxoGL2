@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "Singletons/EventCache.h"
+#include "Singletons/InputModule.h"
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 void key_callback			 (GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -33,7 +34,7 @@ bool Window::Init()
 		std::cout << "Failed to create GLFW window!" << std::endl;
 		return false;
 	}
-	glfwMakeContextCurrent(m_Window);
+	glfwMakeContextCurrent		(m_Window);
 	glfwSetWindowUserPointer	(m_Window, this);
 	glfwSetCursorPosCallback	(m_Window, cursor_position_callback);
 	glfwSetKeyCallback			(m_Window, key_callback);
@@ -68,26 +69,21 @@ void Window::SetViewPort(int& width, int& height)
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->mx = xpos;
-	//win->my = ypos;
+	Input::Cursor(xpos, ypos);
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->m_Keys[key] = action != GLFW_RELEASE;
+	Input::Keys(key, scancode, action, mods);
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
-	//Window* win = (Window*)glfwGetWindowUserPointer(window);
-	//win->m_MouseButtons[button] = action != GLFW_RELEASE;
+	Input::Buttons(button, action, mods);
 }
 
 void scroll_callback(GLFWwindow* window, double xOffset, double yOffset)
 {
-	Window* win = (Window*)glfwGetWindowUserPointer(window);
 	Singletons::EventDispatcher::Instance()->DispatchEvent(EVENT_NAME_SCROLLWHEEL, (int)xOffset, (int)yOffset);
 }
 
