@@ -22,30 +22,30 @@ Layer::~Layer()
 void Layer::OnAwake()
 { 
 	m_EntityList->OnAwake();
-	for (auto nsc : m_Scripts) 
-	{ 
-		nsc->InstantiateFunction();
-		nsc->Instance->OnAwake();
-	} 
+	//for (auto nsc : m_Scripts) 
+	//{ 
+	//	nsc->InstantiateFunction();
+	//	nsc->Instance->OnAwake();
+	//} 
 }
 
 void Layer::OnStart()
 { 
 	m_EntityList->OnStart();
-	for (auto nsc : m_Scripts) nsc->Instance->OnStart();
+	//for (auto nsc : m_Scripts) nsc->Instance->OnStart();
 }
 
 void Layer::OnStop() 
 {
 	m_EntityList->OnStop();
-	for (auto nsc : m_Scripts) nsc->Instance->OnStop();
+	//for (auto nsc : m_Scripts) nsc->Instance->OnStop();
 }
 
 void Layer::OnUpdate(float deltatime)
 {
 	m_EntityList->OnUpdate(deltatime);
 	m_PhysicsManager->OnUpdate(deltatime);
-	for (auto nsc : m_Scripts) nsc->Instance->OnUpdate(deltatime);
+	//for (auto nsc : m_Scripts) nsc->Instance->OnUpdate(deltatime);
 }
 
 void Layer::OnRender()
@@ -64,7 +64,7 @@ ECS::sPtrEntity Layer::Add(ECS::Entity& entity)
 	return sPtr;
 }
 
-void Layer::AddScript(ECS::sPtrNativeScriptComponent component)
-{
-	m_Scripts.push_back(component);
-}
+//void Layer::AddScript(ECS::sPtrNativeScriptComponent component)
+//{
+//	m_Scripts.push_back(component);
+//}

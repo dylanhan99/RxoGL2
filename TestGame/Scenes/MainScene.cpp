@@ -5,6 +5,7 @@
 #include "Vendor/imgui-single.h"
 #include "Singletons/FontCache.h"
 #include "../Scripts/CameraOrthoController.h"
+#include "../Scripts/PlayerController.h"
 
 MainScene::MainScene()
 	: s1("../res/Shaders/basicVert.shader", "../res/Shaders/basicFrag.shader"), 
@@ -12,14 +13,18 @@ MainScene::MainScene()
 {
 	Singletons::FontCache::Instance()->AddFont("arial", "../res/Fonts/arial.ttf");
 
+	camera = ECS::Entity("CameraOrtho");
 	l1.Add(camera);
+	l1.Add(player);
 	//l1.Add(eSprite);
 	l1.Add(eTexture);
 	l1.Add(eTextureSheet);
 	//l1.Add(eLabel);
 	AddLayer(l1);
 
-	camera.AddComponent<ECS::NativeScriptComponent>()->Bind<CameraOrthoController>(960.f / 540.f, true);
+	camera.AddComponent<CameraOrthoController>(960.f / 540.f, true);
+	player.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(10.f, 10.f);
+	player.AddComponent<PlayerController>();
 
 	eSprite.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eSprite.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
