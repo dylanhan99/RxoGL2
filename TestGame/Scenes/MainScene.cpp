@@ -13,37 +13,29 @@ MainScene::MainScene()
 {
 	Singletons::FontCache::Instance()->AddFont("arial", "../res/Fonts/arial.ttf");
 
-	camera = ECS::Entity("CameraOrtho");
-	l1.Add(camera);
-	l1.Add(player);
-	//l1.Add(eSprite);
-	l1.Add(eTexture);
-	l1.Add(eTextureSheet);
-	//l1.Add(eLabel);
+	eCamera = ECS::Entity("CameraOrtho");
+	ePlayer = ECS::Entity("Player");
+	l1.Add(eCamera);
+	l1.Add(ePlayer);
+	l1.Add(eGround);
 	AddLayer(l1);
-
-	camera.AddComponent<CameraOrthoController>(960.f / 540.f, true);
-	player.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(10.f, 10.f);
-	player.AddComponent<PlayerController>();
-
-	eSprite.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
-	eSprite.AddComponent<ECS::Sprite>(1.f, 1.f, 0.5f, 1.f);
 
 	std::vector<glm::vec3> colliderCoords;
 	colliderCoords.push_back(glm::vec3(0.f, 0.f, 0.f));
 	colliderCoords.push_back(glm::vec3(0.f, 1.f, 0.f));
 	colliderCoords.push_back(glm::vec3(1.f, 1.f, 0.f));
 	colliderCoords.push_back(glm::vec3(1.f, 0.f, 0.f));
-	eTexture.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(70.f, 70.f);
-	eTexture.AddComponent<ECS::Sprite>("yo", "../res/Textures/yo2.png", 0.23f, 0.38f, 0.76f, 0.f);
-	eTexture.AddComponent<ECS::PolygonCollider>(&(eSprite.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
 
-	eTextureSheet.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(40.f, 50.f);
-	eTextureSheet.AddComponent<ECS::Sprite>("yo1", "../res/Textures/yo1.png", 0.f, 0.f, 0.f, 1.f, true)->Add("yo1", 8.f, 8.f, 8.f, 8.f);
-	eTextureSheet.AddComponent<ECS::PolygonCollider>(&(eTextureSheet.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
+	eCamera.AddComponent<CameraOrthoController>(960.f / 540.f, true);
 
-	eLabel.AddComponent<ECS::Transform>(0, 0, 0);
-	eLabel.AddComponent<ECS::Label>("TriHard", "arial", 1.f);
+	ePlayer.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(10.f, 10.f);
+	ePlayer.AddComponent<ECS::Sprite>("player", "../res/Textures/player.png", 0.23f, 0.38f, 0.76f, 0.f);
+	ePlayer.AddComponent<ECS::PolygonCollider>(&(ePlayer.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
+	ePlayer.AddComponent<PlayerController>();
+
+	eGround.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
+	eGround.AddComponent<ECS::Sprite>("ground", "../res/Textures/dirt.png", 0.23f, 0.38f, 0.76f, 0.f);
+	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
 
 	s1.Bind();
 	int texIDs[32];
@@ -80,5 +72,5 @@ MainScene::~MainScene()
 void MainScene::OnImguiRender()
 {
 	Scene::OnImguiRender();
-	ImGui::SliderFloat3("Trans x", &(eSprite.GetComponent<ECS::Transform>()->GetPosition().x), -100.0f, 100.0f);
+	//ImGui::SliderFloat3("Trans x", &(eSprite.GetComponent<ECS::Transform>()->GetPosition().x), -100.0f, 100.0f);
 }

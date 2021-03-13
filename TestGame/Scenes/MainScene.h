@@ -11,11 +11,8 @@ private:
 	Shader s1;
 
 	Layer l1;
-	ECS::Entity camera, player;
-	ECS::Entity eSprite;
-	ECS::Entity eTexture;
-	ECS::Entity eTextureSheet;
-	ECS::Entity eLabel;
+	ECS::Entity eCamera, ePlayer;
+	ECS::Entity eGround;
 
 public:
 	MainScene();
