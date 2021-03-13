@@ -2,7 +2,7 @@
 #include "Graphics/Cameras/CameraOrtho.h"
 #include "ECS/ECS.h"
 
-class CameraOrthoController : public ECS::NativeScript
+class CameraOrthoController : public ECS::Component
 {
 private:
 	static CameraOrtho m_Camera;

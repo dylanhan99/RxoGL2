@@ -4,6 +4,14 @@
 namespace ECS
 {
 	// Entity
+	Entity::Entity(std::string name) : 
+		m_Name(name)
+	{
+		if (name == "")
+		{
+			m_Name = "Entity" + ID();
+		}
+	}
 	void Entity::OnAwake()
 	{
 		for (auto c : m_Components) c->OnAwake();
