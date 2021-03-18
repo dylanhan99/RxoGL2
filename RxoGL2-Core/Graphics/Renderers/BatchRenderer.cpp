@@ -55,10 +55,10 @@ void BatchRenderer2D::Submit(const ECS::PtrSprite component)
 	const auto& position	= transform->GetPosition();
 	const auto& size		= transform->GetSize();
 
-	const auto& color = sprite->GetColor();
-	const auto& texCoords = sprite->GetCoords();
-	const auto& texID = sprite->GetTexture()->ID();
-	const bool& isText = false;
+	const auto& color		= sprite->GetColor();
+	const auto& texCoords	= sprite->GetCoords();
+	const auto& texID		= sprite->GetTexture()->ID();
+	const bool& isText		= false;
 	float texSlot = 0.f;
 	bool found = false;
 	if (sprite->GetTexture())

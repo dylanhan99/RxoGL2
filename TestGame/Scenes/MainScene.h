@@ -12,6 +12,7 @@ private:
 
 	Layer l1;
 	ECS::Entity eCamera, ePlayer;
+	ECS::Entity eRed, eBlue, eGreen;
 	ECS::Entity eGround;
 
 public:
