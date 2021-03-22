@@ -4,6 +4,8 @@
 class PlayerController : public ECS::Component
 {
 private:
+	float	m_MovementSpd;
+
 	ECS::sPtrTransform m_PlayerTransform;
 	std::shared_ptr<CameraOrthoController> m_CameraOrtho;
 public:

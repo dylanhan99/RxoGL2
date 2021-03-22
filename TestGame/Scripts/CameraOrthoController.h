@@ -26,6 +26,7 @@ public:
 	// Getters/Setters
 	inline const bool IsRotating() const { return m_IsRotating; }
 	inline const glm::vec3 CameraPosition() const { return m_CameraPosition; }
+	inline void CameraPosition(RXOposition pos) { m_CameraPosition = pos; }
 	inline void CameraPosition(float x, float y, float z) { m_CameraPosition.x = x; m_CameraPosition.y = y; m_CameraPosition.z = z; }
 	inline const float CameraRotation() const { return m_CameraRotation; }
 	inline void CameraRotation(float rotation) { m_CameraRotation = rotation; }

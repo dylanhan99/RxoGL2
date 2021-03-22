@@ -16,11 +16,8 @@ MainScene::MainScene()
 	eCamera = ECS::Entity("CameraOrtho");
 	ePlayer = ECS::Entity("Player");
 	l1.Add(eCamera);
-	//l1.Add(ePlayer);
-	//l1.Add(eGround);
-	l1.Add(eRed);
-	l1.Add(eBlue);
-	l1.Add(eGreen);
+	l1.Add(ePlayer);
+	l1.Add(eGround);
 	AddLayer(l1);
 
 	std::vector<glm::vec3> colliderCoords;
@@ -39,13 +36,6 @@ MainScene::MainScene()
 	eGround.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eGround.AddComponent<ECS::Sprite>("ground", "../res/Textures/dirt.png", 0.23f, 0.38f, 0.76f, 0.f);
 	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
-
-	eRed.AddComponent<ECS::Transform>(-40, -40, 0)->SetSize(40.f, 40.f);
-	eRed.AddComponent<ECS::Sprite>("red", "../res/Textures/Red.png", 0.23f, 0.38f, 0.76f, 0.f);
-	eGreen.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(40.f, 40.f);
-	eGreen.AddComponent<ECS::Sprite>("green", "../res/Textures/Green.png", 0.f, 0.f, 0.f, 0.f);
-	eBlue.AddComponent<ECS::Transform>(40, 40, 0)->SetSize(40.f, 40.f);
-	eBlue.AddComponent<ECS::Sprite>("blue", "../res/Textures/Blue.png", 0.23f, 0.38f, 0.76f, 0.f);
 
 	s1.Bind();
 	int texIDs[32];
