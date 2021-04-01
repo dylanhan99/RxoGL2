@@ -169,4 +169,21 @@ namespace ECS
 		inline const bool& IsColliding() const { return m_IsColliding; }
 		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
 	};
+
+	class RigidBodyComponent : public Component
+	{
+	protected:
+		// If IsKinematic is True, the Entity WILL NOT
+		// be affected by Engine physics.
+		// Rather, the transform will be affected by scripts/animation instead.
+		bool m_IsKinematic;
+
+		sPtrTransform m_Transform;
+		float m_Roatation;
+		float m_Velocity;
+	public:
+
+		// Getters/Setters
+		inline const bool& IsKinematic() const { return m_IsKinematic; }
+	};
 }

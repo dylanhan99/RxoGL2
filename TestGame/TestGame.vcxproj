@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Scenes\MainScene.h" />
     <ClInclude Include="Scripts\CameraOrthoController.h" />
+    <ClInclude Include="Scripts\PlayerCollision.h" />
     <ClInclude Include="Scripts\PlayerController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

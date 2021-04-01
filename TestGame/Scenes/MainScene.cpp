@@ -16,8 +16,8 @@ MainScene::MainScene()
 	eCamera = ECS::Entity("CameraOrtho");
 	ePlayer = ECS::Entity("Player");
 	l1.Add(eCamera);
-	l1.Add(ePlayer);
 	l1.Add(eGround);
+	l1.Add(ePlayer);
 	AddLayer(l1);
 
 	std::vector<glm::vec3> colliderCoords;
