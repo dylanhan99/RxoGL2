@@ -2,7 +2,15 @@
 #include "../ECS/StandardComponents.h"
 #include <gtx/perpendicular.hpp>
 
+// PhysicsManager
 void PhysicsManager::OnUpdate(float deltatime)
+{
+
+}
+
+
+// CollisionManager
+void CollisionManager::OnUpdate(float deltatime)
 {
 	for (int i = 0; i < m_Collidables.size(); i++)
 	{
@@ -45,12 +53,12 @@ void PhysicsManager::OnUpdate(float deltatime)
 	//m_CollidablesColliding.emplace(yo);
 }
 
-void PhysicsManager::Add(ECS::sPtrCollidableComponent component)
+void CollisionManager::Add(ECS::sPtrCollidableComponent component)
 {
 	m_Collidables.push_back(component);
 }
 
-bool PhysicsManager::PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2)
+bool CollisionManager::PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2)
 {
 	auto& c1PerpPlanes = c1->GetPlanes();
 	for (const auto& plane : c1PerpPlanes)
@@ -67,14 +75,14 @@ bool PhysicsManager::PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonColli
 	return true;
 }
 
-bool PhysicsManager::CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCollider c2)
+bool CollisionManager::CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCollider c2)
 {
 	if (glm::distance(c1->GetPosition(), c2->GetPosition()) < (c1->GetRadius() + c2->GetRadius()))
 		return true;
 	return false;
 }
 
-bool PhysicsManager::PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2)
+bool CollisionManager::PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2)
 {
 	auto& c1PerpPlanes = c1->GetPlanes();
 	for (const auto& plane : c1PerpPlanes)

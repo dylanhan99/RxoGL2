@@ -10,7 +10,7 @@ protected:
 	ECS::sPtrEntityList m_EntityList;
 	sPtrLayer m_sPtrThis;
 
-	sPtrPhysicsManager m_PhysicsManager;
+	sPtrCollisionManager m_CollisionManager;
 	//std::vector<ECS::sPtrNativeScriptComponent> m_Scripts;
 public:
 	Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix);
@@ -28,6 +28,6 @@ public:
 	inline const sPtrShader				GetShader()		const { return m_Shader; }
 	inline ECS::sPtrEntity GetEntity(std::string name) { return m_EntityList->GetEntity(name); }
 	inline std::vector<ECS::sPtrEntity> GetEntitiesTag(std::string tag) { return m_EntityList->GetEntitiesTag(tag); }
-	inline const sPtrPhysicsManager		GetPhysicsManager() const { return m_PhysicsManager; }
+	inline const sPtrCollisionManager	GetCollisionManager() const { return m_CollisionManager; }
 	//inline const std::vector<ECS::sPtrNativeScriptComponent> GetScripts() const { return m_Scripts; }
 };

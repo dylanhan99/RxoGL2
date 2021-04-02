@@ -15,14 +15,22 @@ struct ComponentPairHash
     }
 };
 
-class PhysicsManager
+class PhysicsManager : public MonoBehaviour
+{
+private:
+    std::vector<ECS::sPtrRigidBodyComponent> m_RigidBodies;
+public:
+    void OnUpdate(float deltatime) override;
+};
+
+class CollisionManager : public MonoBehaviour
 {
 private:
 	typedef std::pair<ECS::sPtrCollidableComponent, ECS::sPtrCollidableComponent> CollidableComponentPair;
 	std::vector<ECS::sPtrCollidableComponent> m_Collidables;
     std::unordered_set<CollidableComponentPair, ComponentPairHash> m_CollidablesColliding;
 public:
-	void OnUpdate(float deltatime);
+	void OnUpdate(float deltatime) override;
     void Add(ECS::sPtrCollidableComponent component);
 
     static bool PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2);

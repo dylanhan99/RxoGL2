@@ -152,7 +152,7 @@ namespace ECS
 	protected:
 		RXOposition* m_Position;
 		bool m_IsColliding;
-		virtual void AddToPhysicsManager() = 0;
+		virtual void AddToCollisionManager() = 0;
 	public:
 		CollidableComponent(RXOposition* position);
 		/* Get the vector projection (range of the dot product in float) 
@@ -179,8 +179,9 @@ namespace ECS
 		bool m_IsKinematic;
 
 		sPtrTransform m_Transform;
-		float m_Roatation;
-		float m_Velocity;
+		float	m_Mass,
+				m_Roatation,
+				m_Velocity;
 	public:
 
 		// Getters/Setters

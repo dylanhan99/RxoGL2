@@ -8,7 +8,7 @@ Layer::Layer(/*BatchRenderer2D& renderer, */Shader& shader, glm::mat4 matrix)
 	m_Shader(std::make_shared<Shader>(shader)), 
 	m_ProjectionMatrix(matrix), 
 	m_EntityList(std::make_shared<ECS::EntityList>()), m_sPtrThis(this),
-	m_PhysicsManager(std::make_shared<PhysicsManager>())
+	m_CollisionManager(std::make_shared<CollisionManager>())
 {
 	
 }
@@ -44,7 +44,7 @@ void Layer::OnStop()
 void Layer::OnUpdate(float deltatime)
 {
 	m_EntityList->OnUpdate(deltatime);
-	m_PhysicsManager->OnUpdate(deltatime);
+	m_CollisionManager->OnUpdate(deltatime);
 	//for (auto nsc : m_Scripts) nsc->Instance->OnUpdate(deltatime);
 }
 
