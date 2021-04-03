@@ -150,9 +150,22 @@ namespace ECS
 	class CollidableComponent : public Component
 	{
 	protected:
+		struct RB
+		{
+			// If IsKinematic is True, the Entity WILL NOT
+			// be affected by Engine physics.
+			// Rather, the transform will be affected by scripts/animation instead.
+			bool m_IsKinematic;
+			float m_Mass, m_Roatation, m_Velocity;
+		};
+	public:
+		static enum class pType
+		{ Static, Kinematic, Dynamic };
+	protected:
+		pType m_PhysicsType;
 		RXOposition* m_Position;
 		bool m_IsColliding;
-		virtual void AddToCollisionManager() = 0;
+		virtual void AddToPhysicsManager() = 0;
 	public:
 		CollidableComponent(RXOposition* position);
 		/* Get the vector projection (range of the dot product in float) 
@@ -165,26 +178,10 @@ namespace ECS
 		void OnCollisionExit(sPtrCollidableComponent component)  override{}
 
 		// Getters/Setters
-		inline		 RXOposition& GetPosition() { return *m_Position; }
+		inline const pType&			GetPType() const { return m_PhysicsType; }
+		inline		 void			SetPType(pType type) { m_PhysicsType = type; }
+		inline		 RXOposition&	GetPosition() { return *m_Position; }
 		inline const bool& IsColliding() const { return m_IsColliding; }
 		inline		 void  IsColliding(bool colliding) { m_IsColliding = colliding; }
-	};
-
-	class RigidBodyComponent : public Component
-	{
-	protected:
-		// If IsKinematic is True, the Entity WILL NOT
-		// be affected by Engine physics.
-		// Rather, the transform will be affected by scripts/animation instead.
-		bool m_IsKinematic;
-
-		sPtrTransform m_Transform;
-		float	m_Mass,
-				m_Roatation,
-				m_Velocity;
-	public:
-
-		// Getters/Setters
-		inline const bool& IsKinematic() const { return m_IsKinematic; }
 	};
 }

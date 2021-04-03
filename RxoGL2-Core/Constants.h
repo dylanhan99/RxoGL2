@@ -16,7 +16,7 @@
 // [Independent][Class Declaration]
 class Application;
 class BatchRenderer2D;
-class CollisionManager;
+class PhysicsManager;
 class Font;
 class Group;
 class Layer;
@@ -39,7 +39,6 @@ namespace ECS
 	class Label;
 	//class NativeScript;
 	//class NativeScriptComponent;
-	class RigidBodyComponent;
 	class Sprite;
 	class Transform;
 }
@@ -93,7 +92,7 @@ namespace ECS
 // [Shared Pointers]
 typedef std::shared_ptr<Application> sPtrApplication;
 typedef std::shared_ptr<BatchRenderer2D> sPtrBatchRenderer2D;
-typedef std::shared_ptr<CollisionManager> sPtrCollisionManager;
+typedef std::shared_ptr<PhysicsManager> sPtrPhysicsManager;
 typedef std::shared_ptr<Font> sPtrFont;
 typedef std::shared_ptr<Group> sPtrGroup;
 typedef std::shared_ptr<Layer> sPtrLayer;
@@ -116,7 +115,6 @@ namespace ECS
 	typedef std::shared_ptr<Label>					sPtrLabel;
 	//typedef std::shared_ptr<NativeScript>			sPtrNativeScript;
 	//typedef std::shared_ptr<NativeScriptComponent>sPtrNativeScriptComponent;
-	typedef std::shared_ptr<RigidBodyComponent>		sPtrRigidBodyComponent;
 	typedef std::shared_ptr<Sprite>					sPtrSprite;
 	typedef std::shared_ptr<Transform>				sPtrTransform;
 }

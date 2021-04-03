@@ -70,9 +70,9 @@ namespace ECS
 	{
 		UpdateEdges();
 	}
-	void PolygonCollider::AddToCollisionManager()
+	void PolygonCollider::AddToPhysicsManager()
 	{
-		m_Entity->Layer()->GetCollisionManager()->Add(std::static_pointer_cast<PolygonCollider>(m_sPtrThis));
+		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<PolygonCollider>(m_sPtrThis));
 	}
 	void PolygonCollider::UpdateEdges()
 	{
@@ -112,9 +112,9 @@ namespace ECS
 	{
 		auto thisCast  = std::static_pointer_cast<PolygonCollider>(m_sPtrThis);
 		if (std::dynamic_pointer_cast<PolygonCollider>(other))
-			return CollisionManager::PolyPoly(thisCast, std::static_pointer_cast<PolygonCollider>(other));
+			return PhysicsManager::PolyPoly(thisCast, std::static_pointer_cast<PolygonCollider>(other));
 		if (std::dynamic_pointer_cast<CircleCollider>(other))
-			return CollisionManager::PolyCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
+			return PhysicsManager::PolyCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
 		return false;
 	}
 	const std::vector<glm::vec3>& PolygonCollider::GetPlanes()
@@ -127,9 +127,9 @@ namespace ECS
 	}
 
 	// CircleCollider :: Collidable
-	void CircleCollider::AddToCollisionManager()
+	void CircleCollider::AddToPhysicsManager()
 	{
-		m_Entity->Layer()->GetCollisionManager()->Add(std::static_pointer_cast<CircleCollider>(m_sPtrThis));
+		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<CircleCollider>(m_sPtrThis));
 	}
 	std::pair<float, float> CircleCollider::Project(glm::vec3 plane)
 	{
@@ -143,9 +143,9 @@ namespace ECS
 	{
 		auto thisCast = std::static_pointer_cast<CircleCollider>(m_sPtrThis);
 		if (std::dynamic_pointer_cast<PolygonCollider>(other))
-			return CollisionManager::CircleCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
+			return PhysicsManager::CircleCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
 		if (std::dynamic_pointer_cast<CircleCollider>(other))
-			return CollisionManager::PolyCircle(std::static_pointer_cast<PolygonCollider>(other), thisCast);
+			return PhysicsManager::PolyCircle(std::static_pointer_cast<PolygonCollider>(other), thisCast);
 		return false;
 	}
 }

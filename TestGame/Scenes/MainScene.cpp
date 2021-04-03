@@ -30,12 +30,12 @@ MainScene::MainScene()
 
 	ePlayer.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(10.f, 10.f);
 	ePlayer.AddComponent<ECS::Sprite>("player", "../res/Textures/player.png", 0.23f, 0.38f, 0.76f, 0.f);
-	ePlayer.AddComponent<ECS::PolygonCollider>(&(ePlayer.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
+	ePlayer.AddComponent<ECS::PolygonCollider>(&(ePlayer.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords)->SetPType(ECS::CollidableComponent::pType::Dynamic);
 	ePlayer.AddComponent<PlayerController>();
 
 	eGround.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eGround.AddComponent<ECS::Sprite>("ground", "../res/Textures/dirt.png", 0.23f, 0.38f, 0.76f, 0.f);
-	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords);
+	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords)->SetPType(ECS::CollidableComponent::pType::Static);
 
 	s1.Bind();
 	int texIDs[32];

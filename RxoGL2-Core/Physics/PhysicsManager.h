@@ -1,5 +1,5 @@
 #pragma once
-#include "../Constants.h"
+#include "../MonoBehaviour.h"
 
 #include <unordered_set>
 
@@ -18,22 +18,30 @@ struct ComponentPairHash
 class PhysicsManager : public MonoBehaviour
 {
 private:
-    std::vector<ECS::sPtrRigidBodyComponent> m_RigidBodies;
-public:
-    void OnUpdate(float deltatime) override;
-};
-
-class CollisionManager : public MonoBehaviour
-{
-private:
 	typedef std::pair<ECS::sPtrCollidableComponent, ECS::sPtrCollidableComponent> CollidableComponentPair;
 	std::vector<ECS::sPtrCollidableComponent> m_Collidables;
     std::unordered_set<CollidableComponentPair, ComponentPairHash> m_CollidablesColliding;
 public:
 	void OnUpdate(float deltatime) override;
+    void CollisionUpdate();
+    void PhysicsUpdate(float deltatime);
+    void InteractionUpdate(float deltatime);
     void Add(ECS::sPtrCollidableComponent component);
 
+    // Collision Types
     static bool PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonCollider c2);
     static bool CircleCircle(ECS::sPtrCircleCollider c1, ECS::sPtrCircleCollider c2);
     static bool PolyCircle(ECS::sPtrPolygonCollider c1, ECS::sPtrCircleCollider c2);
+
+    // Physics Types
+    static void Static(ECS::sPtrCollidableComponent c);
+    static void Kinematic(ECS::sPtrCollidableComponent c);
+    static void Dynamic(ECS::sPtrCollidableComponent c);
+
+    // Interaction Types
+    static void StaticKinematic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2);
+    static void StaticDynamic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2);
+    static void KinematicDynamic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2);
+    static void KinematicKinematic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2);
+    static void DynamicDynamic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2);
 };

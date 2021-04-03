@@ -81,7 +81,7 @@ namespace ECS
 	class PolygonCollider : public CollidableComponent
 	{
 	protected:
-		void AddToCollisionManager() override;
+		void AddToPhysicsManager() override;
 	private:
 		std::vector<glm::vec3> m_ColliderPointCoords;
 		std::vector<glm::vec3> m_Edges;
@@ -89,7 +89,7 @@ namespace ECS
 		void UpdateEdges();
 	public:
 		PolygonCollider(RXOposition* position, std::vector<glm::vec3> coords /*= Default Coords*/);
-		void OnAwake() override { AddToCollisionManager(); }
+		void OnAwake() override { AddToPhysicsManager(); }
 		std::pair<float, float> Project(glm::vec3 plane) override;
 		bool CheckCollision(sPtrCollidableComponent other) override;
 
@@ -106,11 +106,11 @@ namespace ECS
 	class CircleCollider : public CollidableComponent
 	{
 	protected:
-		void AddToCollisionManager() override;
+		void AddToPhysicsManager() override;
 	private:
 		float m_Radius;
 	public:
-		void OnAwake() override { AddToCollisionManager(); }
+		void OnAwake() override { AddToPhysicsManager(); }
 		std::pair<float, float> Project(glm::vec3 plane) override;
 		bool CheckCollision(sPtrCollidableComponent other) override;
 
