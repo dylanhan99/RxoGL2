@@ -117,7 +117,7 @@ namespace ECS
 			return PhysicsManager::PolyCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
 		return false;
 	}
-	const std::vector<glm::vec3>& PolygonCollider::GetPlanes()
+	const std::vector<glm::vec3> PolygonCollider::GetPlanes()
 	{
 		UpdateEdges();
 		std::vector<glm::vec3> perpendicularPlanes;

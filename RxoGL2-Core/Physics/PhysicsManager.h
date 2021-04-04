@@ -10,9 +10,10 @@ struct ComponentPairHash
     {
         std::size_t x = t.first->Entity()->ID();
         std::size_t y = t.second->Entity()->ID();
-
-        return (x >= y) ? (x * x + x + y) : (y * y + y + x);
+        return Hash(x, y);
     }
+
+    static inline std::size_t Hash(std::size_t x, std::size_t y) { return (x >= y) ? (x * x + x + y) : (y * y + y + x); }
 };
 
 class PhysicsManager : public MonoBehaviour

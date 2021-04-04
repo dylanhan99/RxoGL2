@@ -14,18 +14,20 @@ void PhysicsManager::CollisionUpdate()
 	for (int i = 0; i < m_Collidables.size(); i++)
 	{
 		auto first = m_Collidables[i];
-		if (first->IsColliding())
-			continue;
+		//if (first->IsColliding())
+		//	continue;
 		for (int j = i + 1; j < m_Collidables.size(); j++)
 		{
 			auto second = m_Collidables[j];
+			if (m_CollidablesColliding.find(std::make_pair(first, second)) != m_CollidablesColliding.end())
+				continue;
 			if (first->CheckCollision(second)) // if current component collides with component + 1
 			{
-				first->IsColliding(true);
-				second->IsColliding(true);
 				m_CollidablesColliding.emplace(std::make_pair(first, second));
 				first->Entity()->OnCollisionEnter(second);
 				second->Entity()->OnCollisionEnter(first);
+				first->IsColliding(true);
+				second->IsColliding(true);
 			}
 		}
 	}
@@ -202,7 +204,11 @@ void PhysicsManager::StaticKinematic(ECS::sPtrCollidableComponent c1, ECS::sPtrC
 
 void PhysicsManager::StaticDynamic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2)
 {
-	std::cout << "S - D" << std::endl;
+	//if (c2->IsColliding())
+	//{
+		std::cout << "S - D" << std::endl;
+		//c2->GetPosition().x = 
+	//}
 }
 
 void PhysicsManager::KinematicDynamic(ECS::sPtrCollidableComponent c1, ECS::sPtrCollidableComponent c2)
