@@ -22,9 +22,9 @@ MainScene::MainScene()
 
 	std::vector<glm::vec3> colliderCoords;
 	colliderCoords.push_back(glm::vec3(0.f, 0.f, 0.f));
-	colliderCoords.push_back(glm::vec3(0.f, 1.f, 0.f));
-	colliderCoords.push_back(glm::vec3(1.f, 1.f, 0.f));
-	colliderCoords.push_back(glm::vec3(1.f, 0.f, 0.f));
+	colliderCoords.push_back(glm::vec3(0.f, 1000.f, 0.f));
+	colliderCoords.push_back(glm::vec3(1000.f, 1000.f, 0.f));
+	colliderCoords.push_back(glm::vec3(1000.f, 0.f, 0.f));
 
 	eCamera.AddComponent<CameraOrthoController>(960.f / 540.f, true);
 
