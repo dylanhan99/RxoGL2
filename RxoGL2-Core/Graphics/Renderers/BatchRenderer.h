@@ -29,6 +29,7 @@ public:
 	void Begin() override;
 	void Submit(const ECS::PtrSprite component) override;
 	void Submit(const ECS::PtrLabel component) override;
+	void Submit(const ECS::PtrCollidableComponent component) override;
 	void End() override;
 	void Flush() override;
 };

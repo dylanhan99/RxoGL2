@@ -85,6 +85,7 @@ namespace ECS
 {
 	typedef Sprite* PtrSprite;
 	typedef Label*  PtrLabel;
+	typedef CollidableComponent* PtrCollidableComponent;
 }
 
 // [Unique Pointers]

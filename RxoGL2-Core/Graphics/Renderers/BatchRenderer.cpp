@@ -202,6 +202,12 @@ void BatchRenderer2D::Submit(const ECS::PtrLabel component)
 	}
 }
 
+void BatchRenderer2D::Submit(const ECS::PtrCollidableComponent component)
+{
+	glVertex2f(10, 10);
+	glVertex2f(20, 20);
+}
+
 void BatchRenderer2D::End()
 {
 	glUnmapBuffer(GL_ARRAY_BUFFER);

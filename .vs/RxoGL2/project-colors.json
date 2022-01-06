@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "cf7bcc1d-3565-4394-83ab-ae3e5d1f249c": {
+      "ProjectGuid": "cf7bcc1d-3565-4394-83ab-ae3e5d1f249c",
+      "DisplayName": "TestGame",
+      "ColorIndex": 0
+    },
+    "f2155fe8-d136-4c92-a3aa-c2b8683d92ab": {
+      "ProjectGuid": "f2155fe8-d136-4c92-a3aa-c2b8683d92ab",
+      "DisplayName": "RxoGL2-Core",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

@@ -1,5 +1,7 @@
 #include "ECS.h"
 #include <gtx/projection.hpp>
+#include "../Graphics/Renderers/BatchRenderer.h"
+#include "../Layering/Layer.h"
 
 namespace ECS
 {
@@ -89,6 +91,11 @@ namespace ECS
 		m_IsColliding(false)
 	{
 		
+	}
+	void CollidableComponent::OnDraw()
+	{
+		m_Entity->Layer()->GetRenderer()->Submit(this);
+		//DrawOutline();
 	}
 	//bool CollidableComponent::CheckCollision(sPtrCollidableComponent other)
 	//{

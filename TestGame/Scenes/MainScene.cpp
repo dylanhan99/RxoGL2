@@ -22,9 +22,15 @@ MainScene::MainScene()
 
 	std::vector<glm::vec3> colliderCoords;
 	colliderCoords.push_back(glm::vec3(0.f, 0.f, 0.f));
-	colliderCoords.push_back(glm::vec3(0.f, 1000.f, 0.f));
-	colliderCoords.push_back(glm::vec3(1000.f, 1000.f, 0.f));
-	colliderCoords.push_back(glm::vec3(1000.f, 0.f, 0.f));
+	colliderCoords.push_back(glm::vec3(0.f, 10.f, 0.f));
+	colliderCoords.push_back(glm::vec3(10.f, 10.f, 0.f));
+	colliderCoords.push_back(glm::vec3(10.f, 0.f, 0.f));
+
+	std::vector<glm::vec3> colliderCoords2;
+	colliderCoords2.push_back(glm::vec3(0.f, 0.f, 0.f));
+	colliderCoords2.push_back(glm::vec3(0.f, 50.f, 0.f));
+	colliderCoords2.push_back(glm::vec3(50.f, 50.f, 0.f));
+	colliderCoords2.push_back(glm::vec3(50.f, 0.f, 0.f));
 
 	eCamera.AddComponent<CameraOrthoController>(960.f / 540.f, true);
 
@@ -35,7 +41,7 @@ MainScene::MainScene()
 
 	eGround.AddComponent<ECS::Transform>(0, 0, 0)->SetSize(50.f, 50.f);
 	eGround.AddComponent<ECS::Sprite>("ground", "../res/Textures/dirt.png", 0.23f, 0.38f, 0.76f, 0.f);
-	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords)->SetPType(ECS::CollidableComponent::pType::Static);
+	eGround.AddComponent<ECS::PolygonCollider>(&(eGround.GetComponent<ECS::Transform>()->GetPosition()), colliderCoords2)->SetPType(ECS::CollidableComponent::pType::Static);
 
 	s1.Bind();
 	int texIDs[32];

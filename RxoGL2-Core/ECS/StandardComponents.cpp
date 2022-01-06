@@ -70,6 +70,10 @@ namespace ECS
 	{
 		UpdateEdges();
 	}
+	void PolygonCollider::OnUpdate(float deltatime)
+	{
+		UpdateEdges();
+	}
 	void PolygonCollider::AddToPhysicsManager()
 	{
 		m_Entity->Layer()->GetPhysicsManager()->Add(std::static_pointer_cast<PolygonCollider>(m_sPtrThis));
@@ -117,9 +121,33 @@ namespace ECS
 			return PhysicsManager::PolyCircle(thisCast, std::static_pointer_cast<CircleCollider>(other));
 		return false;
 	}
+	void PolygonCollider::DrawOutline()
+	{
+		//for (size_t i = 0; i < m_ColliderPointCoords.size(); i++)
+		//{
+		//	auto edge = m_ColliderPointCoords[i];
+		//	switch (i)
+		//	{
+		//	case 0:
+		//		edge = m_ColliderPointCoords[m_ColliderPointCoords.size() - 1] - m_ColliderPointCoords[i];
+		//		auto startPt = m_ColliderPointCoords[m_ColliderPointCoords.size() - 1];
+		//		auto endPt = m_ColliderPointCoords[i]
+		//		glLineWidth(w)
+		//		glBegin(GL_LINES)
+		//		glColor3fv((255, 255, 255))
+		//		glVertex3fv((x1, y1, z1))
+		//		glVertex3fv((x2, y2, z2))
+		//		glEnd()
+		//		continue;
+		//	default:
+		//		edge = m_ColliderPointCoords[i] - m_ColliderPointCoords[i - 1];
+		//		continue;
+		//	}
+		//}
+	}
 	const std::vector<glm::vec3> PolygonCollider::GetPlanes()
 	{
-		UpdateEdges();
+		//UpdateEdges();
 		std::vector<glm::vec3> perpendicularPlanes;
 		for (size_t i = 0; i < m_Edges.size() - 1; i++)
 			perpendicularPlanes.push_back(glm::vec3(-m_Edges[i].y, m_Edges[i].x, m_Edges[i].z));

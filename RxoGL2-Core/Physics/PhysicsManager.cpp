@@ -147,8 +147,8 @@ bool PhysicsManager::PolyPoly(ECS::sPtrPolygonCollider c1, ECS::sPtrPolygonColli
 		auto c1Range = c1->Project(plane);
 		auto c2Range = c2->Project(plane);
 
-		if ((c1Range.first < c2Range.second && c1Range.first > c2Range.second) ||
-			(c2Range.first < c1Range.second && c2Range.first > c1Range.second))
+		if (c1Range.first <= c2Range.second && c1Range.second >= c2Range.first)/* ||
+			(c2Range.first < c1Range.second && c2Range.first > c1Range.second))*/
 			continue;
 		else
 			return false;

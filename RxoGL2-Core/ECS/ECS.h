@@ -144,7 +144,6 @@ namespace ECS
 
 	class RenderableComponent : public Component
 	{
-
 	};
 
 	class CollidableComponent : public Component
@@ -172,7 +171,9 @@ namespace ECS
 		  of this component by parsing an edge in. */
 		virtual std::pair<float, float> Project(glm::vec3 plane) = 0;
 		virtual bool CheckCollision(sPtrCollidableComponent other) { return false; }
+		virtual void DrawOutline() = 0;
 
+		void OnDraw() override;
 		void OnCollisionEnter(sPtrCollidableComponent component) override{}
 		void OnCollisionStay(sPtrCollidableComponent component)  override{}
 		void OnCollisionExit(sPtrCollidableComponent component)  override{}
